@@ -4,7 +4,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:via_app/model/categories.dart';
 import 'package:via_app/model/volunteer_opportunity.dart';
 import 'package:via_app/utils/color.dart';
+import 'package:via_app/utils/theme.dart';
 import 'package:via_app/widgets/icon_text.dart';
+import 'package:via_app/widgets/iconbutton.dart';
+import 'package:via_app/widgets/secondary_volunteer_card.dart';
 import 'package:via_app/widgets/volunteer_card.dart';
 
 class HomePage extends StatefulWidget {
@@ -68,15 +71,28 @@ class _HomePageState extends State<HomePage> {
               Text('🌱 Causas para explorar', style: textTheme.titleMedium),
               SizedBox(height: 10),
 
-              SecondaryVolunteerCard(
-                image:
-                    'https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=400',
-                title: 'Teste',
-                name: 'wddd',
-                distance: '1.2',
-                time: '2',
-                category: 'tempo',
-                onTap: () {},
+              SizedBox(
+                height: 240,
+                child: ListView.separated(
+                  separatorBuilder: (context, index) => SizedBox(width: 10),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: allItems.where((e) => e.isDestaque).length,
+                  itemBuilder: (context, index) {
+                    final destaques = allItems
+                        .where((e) => e.isDestaque)
+                        .toList();
+                    final item = destaques[index];
+                    return SecondaryVolunteerCard(
+                      image: item.imageUrl,
+                      title: item.title,
+                      name: item.organizationName,
+                      distance: item.distance.toString(),
+                      time: '${item.startTime}-${item.endTime}',
+                      category: item.category,
+                      onTap: () {},
+                    );
+                  },
+                ),
               ),
               SizedBox(height: 20),
 
@@ -108,7 +124,7 @@ class _HomePageState extends State<HomePage> {
                     title: item.title,
                     name: item.organizationName,
                     distance: item.distance.toString(),
-                    time: '${item.startTime} - ${item.endTime}',
+                    time: '${item.startTime}-${item.endTime}',
                     image: item.imageUrl,
                     onTap: () {},
                     amountCurrent: item.currentVolunteers.toString(),
@@ -159,13 +175,17 @@ class _HomePageState extends State<HomePage> {
               CoreInput(
                 hint: 'Buscar oportunidades ...',
                 onChanged: (value) {},
-                onSuffixTap: () {},
                 size: CoreInputSize.lg,
                 variant: CoreInputVariant.filled,
                 controller: TextEditingController(),
                 prefixIcon: FontAwesomeIcons.magnifyingGlass,
                 suffixIcon: FontAwesomeIcons.sliders,
+                onSuffixTap: () => showModalBottomSheet(
+                  context: context,
+                  builder: (context) => bottoModal(),
+                ),
               ),
+              SizedBox(width: 10),
               SizedBox(height: 10),
             ],
           ),
@@ -173,101 +193,81 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-}
 
-class SecondaryVolunteerCard extends StatelessWidget {
-  final String image;
-  final String title;
-  final String name;
-  final String distance;
-  final String time;
-  final String category;
-  final VoidCallback onTap;
-
-  const SecondaryVolunteerCard({
-    super.key,
-    required this.image,
-    required this.title,
-    required this.name,
-    required this.distance,
-    required this.time,
-    required this.category,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 220,
-      child: CoreCard(
-      onTap: onTap,
-      variant: .elevated,
-      padding: .zero,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            children: [
-              ClipRRect(
-                clipBehavior: .antiAlias,
-                borderRadius: .only(
-                  topLeft: .circular(12),
-                  topRight: .circular(12),
-                ),
-                child: Image.network(image, height: 150, width: double.infinity, fit: BoxFit.cover),
-              ),
-              Positioned(
-                left: 10,
-                top: 10,
-                child: Container(
-                  padding: .symmetric(horizontal: 10, vertical: 5),
-                  decoration: BoxDecoration(
-                    borderRadius: .all(.circular(12)),
-                    color: AppColors.white,
-                  ),
-                  child: Text(
-                    category,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextTheme.of(context).bodyMedium!.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.gray200,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const .symmetric(horizontal: 12, vertical: 10),
-            child: Column(
-              crossAxisAlignment: .start,
+  Container bottoModal() => Container(
+    child: SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
               children: [
-                Text(
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  title,
-                  style: TextTheme.of(context).titleMedium,
-                ),
-                SizedBox(height: 10),
-
-                Row(
-                  mainAxisSize: .min,
-                  children: [
-                    IconText(
-                      text: '$distance km',
-                      icon: FontAwesomeIcons.locationDot,
-                    ),
-                    SizedBox(width: 20),
-                    IconText(text: '$time h', icon: FontAwesomeIcons.clock),
-                  ],
+                Icon(FontAwesomeIcons.sliders, size: 20),
+                SizedBox(width: 10),
+                Text('Filtros', style: TextTheme.of(context).titleMedium),
+                Spacer(),
+                CoreIconButton(
+                  icon: FontAwesomeIcons.xmark,
+                  variant: CoreIconButtonVariant.secondary,
+                  size: CoreIconButtonSize.sm,
+                  borderRadius: 100,
+                  onPressed: () => Navigator.pop(context),
                 ),
               ],
             ),
-          ),
-        ],
+            SizedBox(height: 10),
+            CoreDivider.horizontal(thickness: 0.5),
+            SizedBox(height: 20),
+            Text('Categoria', style: TextTheme.of(context).titleMedium),
+            SizedBox(height: 10),
+            SizedBox(
+              height: 35,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: categories.length,
+                separatorBuilder: (context, index) => SizedBox(width: 8),
+                itemBuilder: (context, index) {
+                  final cat = categories[index];
+                  return CoreChip(
+                    label: cat.name,
+                    size: CoreChipSize.lg,
+                    variant: CoreChipVariant.filled,
+                  );
+                },
+              ),
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: .spaceBetween,
+              crossAxisAlignment: .center,
+              children: [
+                Text(
+                  'Distância máxima',
+                  style: TextTheme.of(context).titleMedium,
+                ),
+                Text(
+                  '10 km',
+                  style: TextTheme.of(
+                    context,
+                  ).bodyLarge!.copyWith(color: AppColors.primaryDark),
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            Slider(
+              padding: .zero,
+              value: 10,
+              min: 0,
+              max: 100,
+              onChanged: (value) {},
+              thumbColor: AppColors.primary,
+              activeColor: AppColors.primary,
+              inactiveColor: AppColors.gray100
+            ),
+          ],
+        ),
       ),
-      ),
-    );
-  }
+    ),
+  );
 }
