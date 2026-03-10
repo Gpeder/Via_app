@@ -4,7 +4,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:via_app/enum/category_color.dart';
 import 'package:via_app/utils/color.dart';
 import 'package:via_app/widgets/icon_text.dart';
-import 'package:via_app/widgets/iconbutton.dart';
 import 'package:via_app/widgets/stack_avatar.dart';
 
 class VolunteerCard extends StatelessWidget {

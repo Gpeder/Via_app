@@ -4,9 +4,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:via_app/model/categories.dart';
 import 'package:via_app/model/volunteer_opportunity.dart';
 import 'package:via_app/utils/color.dart';
-import 'package:via_app/utils/theme.dart';
-import 'package:via_app/widgets/icon_text.dart';
-import 'package:via_app/widgets/iconbutton.dart';
 import 'package:via_app/widgets/secondary_volunteer_card.dart';
 import 'package:via_app/widgets/volunteer_card.dart';
 
@@ -185,7 +182,6 @@ class _HomePageState extends State<HomePage> {
                   builder: (context) => bottoModal(),
                 ),
               ),
-              SizedBox(width: 10),
               SizedBox(height: 10),
             ],
           ),
@@ -195,78 +191,165 @@ class _HomePageState extends State<HomePage> {
   }
 
   Container bottoModal() => Container(
-    child: SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-      child: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
+    padding: const EdgeInsets.only(top: 20, bottom: 20),
+    child: SafeArea(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
               children: [
-                Icon(FontAwesomeIcons.sliders, size: 20),
-                SizedBox(width: 10),
-                Text('Filtros', style: TextTheme.of(context).titleMedium),
-                Spacer(),
-                CoreIconButton(
-                  icon: FontAwesomeIcons.xmark,
-                  variant: CoreIconButtonVariant.secondary,
-                  size: CoreIconButtonSize.sm,
-                  borderRadius: 100,
-                  onPressed: () => Navigator.pop(context),
+                Row(
+                  children: [
+                    Icon(FontAwesomeIcons.sliders, size: 20),
+                    SizedBox(width: 10),
+                    Text('Filtros', style: TextTheme.of(context).titleLarge),
+                    Spacer(),
+                    CoreIconButton(
+                      icon: FontAwesomeIcons.xmark,
+                      variant: CoreIconButtonVariant.secondary,
+                      size: CoreIconButtonSize.sm,
+                      borderRadius: 100,
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                  ],
                 ),
+                SizedBox(height: 10),
+                CoreDivider.horizontal(thickness: 0.5),
               ],
             ),
-            SizedBox(height: 10),
-            CoreDivider.horizontal(thickness: 0.5),
-            SizedBox(height: 20),
-            Text('Categoria', style: TextTheme.of(context).titleMedium),
-            SizedBox(height: 10),
-            SizedBox(
-              height: 35,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemCount: categories.length,
-                separatorBuilder: (context, index) => SizedBox(width: 8),
-                itemBuilder: (context, index) {
-                  final cat = categories[index];
-                  return CoreChip(
-                    label: cat.name,
-                    size: CoreChipSize.lg,
-                    variant: CoreChipVariant.filled,
-                  );
-                },
+          ),
+          
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Categoria', style: TextTheme.of(context).titleMedium),
+                  SizedBox(height: 10),
+                  SizedBox(
+                    height: 35,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: categories.length,
+                      separatorBuilder: (context, index) => SizedBox(width: 8),
+                      itemBuilder: (context, index) {
+                        final cat = categories[index];
+                        return CoreChip(
+                          label: cat.name,
+                          size: CoreChipSize.lg,
+                          variant: CoreChipVariant.filled,
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Distância máxima',
+                        style: TextTheme.of(context).titleMedium,
+                      ),
+                      Text(
+                        '10 km',
+                        style: TextTheme.of(
+                          context,
+                        ).bodyLarge!.copyWith(color: AppColors.primaryDark),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  CoreSlider(
+                    value: 0,
+                    min: 0,
+                    max: 100,
+                    onChanged: (value) {},
+                    activeColor: AppColors.primary,
+                    thumbColor: AppColors.primary,
+                    inactiveColor: AppColors.gray100,
+                  ),
+                  SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Text('0 km', style: TextTheme.of(context).bodyMedium),
+                      Spacer(),
+                      Text('10 km', style: TextTheme.of(context).bodyMedium),
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  Text('Categoria', style: TextTheme.of(context).titleMedium),
+                  SizedBox(height: 10),
+                  GridView(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 8,
+                      crossAxisSpacing: 8,
+                      mainAxisExtent: 45,
+                    ),
+                    children: [
+                      CoreChip(
+                        label: 'Qualquer duração',
+                        size: CoreChipSize.lg,
+                        variant: CoreChipVariant.filled,
+                      ),
+                      CoreChip(
+                        label: 'Até 2h',
+                        size: CoreChipSize.lg,
+                        variant: CoreChipVariant.filled,
+                      ),
+                      CoreChip(
+                        label: 'Até 4h',
+                        size: CoreChipSize.lg,
+                        variant: CoreChipVariant.filled,
+                      ),
+                      CoreChip(
+                        label: 'Dia todo',
+                        size: CoreChipSize.lg,
+                        variant: CoreChipVariant.filled,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  Text('Dias da semana', style: TextTheme.of(context).titleMedium),
+                  SizedBox(height: 10),
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 10,
+                    children: [
+                      'Qualquer dia', 'Segunda', 'Terça', 'Quarta',
+                      'Quinta', 'Sexta', 'Sábado', 'Domingo'
+                    ].map((day) => Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CoreChip(
+                          label: day,
+                          size: CoreChipSize.lg,
+                          selected: day == 'Qualquer dia',
+                          variant: CoreChipVariant.filled,
+                        ),
+                      ],
+                    )).toList(),
+                  ),
+                  SizedBox(height: 30),
+                  CoreButton(
+                    label: 'Aplicar',
+                    size: CoreButtonSize.lg,
+                    fullWidth: true,
+                    variant: CoreButtonVariant.primary,
+                    onPressed: () {},
+                  ),
+                ],
               ),
             ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: .spaceBetween,
-              crossAxisAlignment: .center,
-              children: [
-                Text(
-                  'Distância máxima',
-                  style: TextTheme.of(context).titleMedium,
-                ),
-                Text(
-                  '10 km',
-                  style: TextTheme.of(
-                    context,
-                  ).bodyLarge!.copyWith(color: AppColors.primaryDark),
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
-            Slider(
-              padding: .zero,
-              value: 10,
-              min: 0,
-              max: 100,
-              onChanged: (value) {},
-              thumbColor: AppColors.primary,
-              activeColor: AppColors.primary,
-              inactiveColor: AppColors.gray100
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     ),
   );
