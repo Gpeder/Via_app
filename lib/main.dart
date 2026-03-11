@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:via_app/utils/theme.dart';
+import 'package:via_app/view/detailcard_page.dart';
 import 'package:via_app/view/home_page.dart';
 import 'package:via_app/view/login_page.dart';
 
@@ -22,6 +23,7 @@ class ViaApp extends StatelessWidget {
       routes: {
         '/home': (context) => const HomePage(),
         '/login': (context) => LoginPage(),
+        '/detailcard': (context) => const DetailcardPage(),
       },
     );
   }

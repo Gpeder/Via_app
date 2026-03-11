@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                   itemBuilder: (context, index) {
                     final category = categoryItem[index];
                     return CoreChip(
-                      size: .lg,
+                      size: CoreChipSize.lg,
                       selected: _selectedCategoryIndex == index,
                       onSelected: (value) {
                         setState(() {
@@ -87,7 +87,9 @@ class _HomePageState extends State<HomePage> {
                       distance: item.distance.toString(),
                       time: '${item.startTime}-${item.endTime}',
                       category: item.category,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, '/detailcard');
+                      },
                     );
                   },
                 ),
@@ -124,7 +126,9 @@ class _HomePageState extends State<HomePage> {
                     distance: item.distance.toString(),
                     time: '${item.startTime}-${item.endTime}',
                     image: item.imageUrl,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, '/detailcard');
+                    },
                     amountCurrent: item.currentVolunteers.toString(),
                     amountMax: item.requiredVolunteers.toString(),
                     category: item.category,

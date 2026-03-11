@@ -42,18 +42,18 @@ class VolunteerCard extends StatelessWidget {
 
     return CoreCard(
       onTap: onTap,
-      variant: .elevated,
-      padding: .zero,
+      variant: CoreCardVariant.elevated,
+      padding: EdgeInsets.zero,
       child: Column(
-        crossAxisAlignment: .start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Stack(
             children: [
               ClipRRect(
-                clipBehavior: .antiAlias,
-                borderRadius: .only(
-                  topLeft: .circular(12),
-                  topRight: .circular(12),
+                clipBehavior: Clip.antiAlias,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(12),
+                  topRight: Radius.circular(12),
                 ),
                 child: Image(
                   height: 180,
@@ -66,9 +66,9 @@ class VolunteerCard extends StatelessWidget {
                 left: 10,
                 top: 10,
                 child: Container(
-                  padding: .symmetric(horizontal: 10, vertical: 5),
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   decoration: BoxDecoration(
-                    borderRadius: .all(.circular(12)),
+                    borderRadius:  BorderRadius.all(Radius.circular(12)),
                     color: cat.bgColor,
                   ),
                   child: Text(
@@ -85,7 +85,7 @@ class VolunteerCard extends StatelessWidget {
                 right: 10,
                 top: 10,
                 child: CoreIconButton(
-                  variant: .secondary,
+                  variant: CoreIconButtonVariant.secondary,
                   icon: FontAwesomeIcons.heart,
                   onPressed: favTap,
                 ),
@@ -95,9 +95,9 @@ class VolunteerCard extends StatelessWidget {
                 left: 10,
                 bottom: 10,
                 child: Container(
-                  padding: .symmetric(horizontal: 10, vertical: 5),
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   decoration: BoxDecoration(
-                    borderRadius: .all(.circular(12)),
+                    borderRadius: BorderRadius.all(Radius.circular(12)),
                     color: AppColors.white,
                   ),
                   child: Text(
@@ -111,9 +111,9 @@ class VolunteerCard extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: const .symmetric(horizontal: 12, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
             child: Column(
-              crossAxisAlignment: .start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   maxLines: 1,
@@ -132,7 +132,7 @@ class VolunteerCard extends StatelessWidget {
                 SizedBox(height: 10),
 
                 Row(
-                  mainAxisAlignment: .spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconText(
                       text: '$distance km',
