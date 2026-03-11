@@ -3,6 +3,7 @@ import 'package:via_app/utils/theme.dart';
 import 'package:via_app/view/detailcard_page.dart';
 import 'package:via_app/view/home_page.dart';
 import 'package:via_app/view/login_page.dart';
+import 'package:via_app/view/selectdate_page.dart';
 
 void main() {
   runApp(const ViaApp());
@@ -24,6 +25,7 @@ class ViaApp extends StatelessWidget {
         '/home': (context) => const HomePage(),
         '/login': (context) => LoginPage(),
         '/detailcard': (context) => const DetailcardPage(),
+        '/selectdate': (context) => const SelectdatePage(),
       },
     );
   }

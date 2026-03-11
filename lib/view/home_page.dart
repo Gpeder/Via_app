@@ -134,7 +134,11 @@ class _HomePageState extends State<HomePage> {
                     category: item.category,
                     rating: item.rating.toString(),
                     voteCount: item.voteCount.toString(),
-                    favTap: () {},
+                    favTap: () {
+                      setState(() {
+                        item.isFavorite = !item.isFavorite;
+                      });
+                    },
                   );
                 },
               ),

@@ -5,6 +5,7 @@ class VolunteerOpportunity {
   final String organizationName;
   final String category;
   final String imageUrl;
+  final String logoUrl;
   final DateTime date;
   final String startTime;
   final String endTime;
@@ -14,7 +15,7 @@ class VolunteerOpportunity {
   final double rating;
   final int voteCount;
   final double distance;
-  final bool isFavorite;
+  bool isFavorite;
   final bool isDestaque;
 
   VolunteerOpportunity({
@@ -35,6 +36,7 @@ class VolunteerOpportunity {
     this.distance = 0.0,
     this.isFavorite = false,
     this.isDestaque = false,
+    required this.logoUrl,
   });
 }
 
@@ -42,10 +44,13 @@ final List<VolunteerOpportunity> mockOpportunities = [
   VolunteerOpportunity(
     id: '1',
     title: 'Banho em Cães de Abrigo',
-    description: 'Precisamos de voluntários para ajudar na higiene dos cães resgatados.',
+    description:
+        'Precisamos de voluntários para ajudar na higiene dos cães resgatados.',
     organizationName: 'Amigo Bicho',
     category: 'Animais',
-    imageUrl: 'https://images.unsplash.com/photo-1548191265-cc70d3d45ba1?q=80&w=400',
+    imageUrl:
+        'https://images.unsplash.com/photo-1548191265-cc70d3d45ba1?q=80&w=400',
+    logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/124598?v=3',
     date: DateTime.now().add(const Duration(days: 3)),
     startTime: '09:00',
     endTime: '12:00',
@@ -60,10 +65,13 @@ final List<VolunteerOpportunity> mockOpportunities = [
   VolunteerOpportunity(
     id: '2',
     title: 'Distribuição de Alimentos',
-    description: 'Ajude na organização e entrega de marmitas para moradores de rua.',
+    description:
+        'Ajude na organização e entrega de marmitas para moradores de rua.',
     organizationName: 'Ação Solidária',
     category: 'Alimentação',
-    imageUrl: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=400',
+    imageUrl:
+        'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=400',
+    logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/124597?v=3',
     date: DateTime.now().add(const Duration(days: 2)),
     startTime: '14:00',
     endTime: '16:00',
@@ -78,10 +86,13 @@ final List<VolunteerOpportunity> mockOpportunities = [
   VolunteerOpportunity(
     id: '3',
     title: 'Oficina de Leitura Infantil',
-    description: 'Contação de histórias e atividades lúdicas para crianças de 4 a 10 anos.',
+    description:
+        'Contação de histórias e atividades lúdicas para crianças de 4 a 10 anos.',
     organizationName: 'Futuro Brilhante',
     category: 'Crianças e Jovens',
-    imageUrl: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=400',
+    imageUrl:
+        'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=400',
+    logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/124599?v=3',
     date: DateTime.now().add(const Duration(days: 4)),
     startTime: '10:00',
     endTime: '12:00',
@@ -96,10 +107,13 @@ final List<VolunteerOpportunity> mockOpportunities = [
   VolunteerOpportunity(
     id: '4',
     title: 'Visita Recreativa a Idosos',
-    description: 'Tarde de música, jogos e conversas com idosos no lar da terceira idade.',
+    description:
+        'Tarde de música, jogos e conversas com idosos no lar da terceira idade.',
     organizationName: 'Viver Bem',
     category: 'Idosos',
-    imageUrl: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=400',
+    imageUrl:
+        'https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=400',
+    logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/101010?v=3',
     date: DateTime.now().add(const Duration(days: 5)),
     startTime: '15:00',
     endTime: '17:00',
@@ -117,7 +131,9 @@ final List<VolunteerOpportunity> mockOpportunities = [
     description: 'Mutirão para retirada de lixo das margens do rio da cidade.',
     organizationName: 'EcoVida',
     category: 'Meio Ambiente',
-    imageUrl: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?q=80&w=400',
+    imageUrl:
+        'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?q=80&w=400',
+    logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/202020?v=3',
     date: DateTime.now().add(const Duration(days: 6)),
     startTime: '07:30',
     endTime: '11:00',
@@ -132,10 +148,13 @@ final List<VolunteerOpportunity> mockOpportunities = [
   VolunteerOpportunity(
     id: '6',
     title: 'Aula de Reforço Escolar',
-    description: 'Ensino de matemática e português para jovens em situação de vulnerabilidade.',
+    description:
+        'Ensino de matemática e português para jovens em situação de vulnerabilidade.',
     organizationName: 'Educa Mais',
     category: 'Educação',
-    imageUrl: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=400',
+    imageUrl:
+        'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=400',
+    logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/303030?v=3',
     date: DateTime.now().add(const Duration(days: 7)),
     startTime: '18:00',
     endTime: '19:30',
@@ -150,10 +169,13 @@ final List<VolunteerOpportunity> mockOpportunities = [
   VolunteerOpportunity(
     id: '7',
     title: 'Campanha de Doação de Sangue',
-    description: 'Apoie na organização e acolhimento de doadores no hemocentro municipal.',
+    description:
+        'Apoie na organização e acolhimento de doadores no hemocentro municipal.',
     organizationName: 'Saúde para Todos',
     category: 'Saúde',
-    imageUrl: 'https://images.unsplash.com/photo-1615461066841-6116e61058f4?q=80&w=400',
+    imageUrl:
+        'https://images.unsplash.com/photo-1615461066841-6116e61058f4?q=80&w=400',
+    logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/404040?v=3',
     date: DateTime.now().add(const Duration(days: 8)),
     startTime: '08:00',
     endTime: '13:00',
@@ -163,15 +185,18 @@ final List<VolunteerOpportunity> mockOpportunities = [
     rating: 4.9,
     voteCount: 140,
     distance: 3.0,
-    isFavorite: true, 
+    isFavorite: true,
   ),
   VolunteerOpportunity(
     id: '8',
     title: 'Oficina de Grafite Comunitário',
-    description: 'Pintura de mural coletivo para revitalizar espaços públicos do bairro.',
+    description:
+        'Pintura de mural coletivo para revitalizar espaços públicos do bairro.',
     organizationName: 'Arte na Rua',
     category: 'Cultura e Arte',
-    imageUrl: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?q=80&w=400',
+    imageUrl:
+        'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?q=80&w=400',
+    logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/505050?v=3',
     date: DateTime.now().add(const Duration(days: 9)),
     startTime: '09:00',
     endTime: '16:00',
@@ -186,10 +211,13 @@ final List<VolunteerOpportunity> mockOpportunities = [
   VolunteerOpportunity(
     id: '9',
     title: 'Aula de Informática para Idosos',
-    description: 'Ensine o básico de celular e computador para quem nunca teve acesso.',
+    description:
+        'Ensine o básico de celular e computador para quem nunca teve acesso.',
     organizationName: 'Conecta Brasil',
     category: 'Tecnologia',
-    imageUrl: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=400',
+    imageUrl:
+        'https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=400',
+    logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/606060?v=3',
     date: DateTime.now().add(const Duration(days: 10)),
     startTime: '14:00',
     endTime: '16:00',
@@ -204,10 +232,13 @@ final List<VolunteerOpportunity> mockOpportunities = [
   VolunteerOpportunity(
     id: '10',
     title: 'Escolinha de Futebol Social',
-    description: 'Treine e motive crianças carentes através do esporte em campo comunitário.',
+    description:
+        'Treine e motive crianças carentes através do esporte em campo comunitário.',
     organizationName: 'Gol Solidário',
     category: 'Esportes',
-    imageUrl: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=400',
+    imageUrl:
+        'https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=400',
+    logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/707070?v=3',
     date: DateTime.now().add(const Duration(days: 11)),
     startTime: '16:00',
     endTime: '18:00',
@@ -222,10 +253,13 @@ final List<VolunteerOpportunity> mockOpportunities = [
   VolunteerOpportunity(
     id: '11',
     title: 'Mutirão de Reforma Comunitária',
-    description: 'Pintura e pequenos reparos na sede da associação de moradores.',
+    description:
+        'Pintura e pequenos reparos na sede da associação de moradores.',
     organizationName: 'Bairro Vivo',
     category: 'Geral / Outros',
-    imageUrl: 'https://images.unsplash.com/photo-1596464716127-f2a82984de30?q=80&w=400',
+    imageUrl:
+        'https://images.unsplash.com/photo-1596464716127-f2a82984de30?q=80&w=400',
+    logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/808080?v=3',
     date: DateTime.now().add(const Duration(days: 12)),
     startTime: '08:00',
     endTime: '12:00',
@@ -240,10 +274,13 @@ final List<VolunteerOpportunity> mockOpportunities = [
   VolunteerOpportunity(
     id: '12',
     title: 'Castração Solidária de Gatos',
-    description: 'Ajude a organizar o mutirão de castração gratuita para gatos de rua.',
+    description:
+        'Ajude a organizar o mutirão de castração gratuita para gatos de rua.',
     organizationName: 'Patinhas Felizes',
     category: 'Animais',
-    imageUrl: 'https://images.unsplash.com/photo-1574158622682-e40e69881006?q=80&w=400',
+    imageUrl:
+        'https://images.unsplash.com/photo-1574158622682-e40e69881006?q=80&w=400',
+    logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/909090?v=3',
     date: DateTime.now().add(const Duration(days: 13)),
     startTime: '08:00',
     endTime: '14:00',
@@ -259,10 +296,13 @@ final List<VolunteerOpportunity> mockOpportunities = [
   VolunteerOpportunity(
     id: '13',
     title: 'Feira de Saúde Comunitária',
-    description: 'Aferição de pressão, orientação nutricional e triagem básica para a comunidade.',
+    description:
+        'Aferição de pressão, orientação nutricional e triagem básica para a comunidade.',
     organizationName: 'Saúde na Praça',
     category: 'Saúde',
-    imageUrl: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=400',
+    imageUrl:
+        'https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=400',
+    logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/101112?v=3',
     date: DateTime.now().add(const Duration(days: 14)),
     startTime: '09:00',
     endTime: '15:00',
@@ -278,10 +318,13 @@ final List<VolunteerOpportunity> mockOpportunities = [
   VolunteerOpportunity(
     id: '14',
     title: 'Plantio de Árvores Nativas',
-    description: 'Reflorestamento de área degradada com espécies nativas da Mata Atlântica.',
+    description:
+        'Reflorestamento de área degradada com espécies nativas da Mata Atlântica.',
     organizationName: 'Raízes Verdes',
     category: 'Meio Ambiente',
-    imageUrl: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=400',
+    imageUrl:
+        'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=400',
+    logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/131415?v=3',
     date: DateTime.now().add(const Duration(days: 15)),
     startTime: '07:00',
     endTime: '11:30',
@@ -297,10 +340,13 @@ final List<VolunteerOpportunity> mockOpportunities = [
   VolunteerOpportunity(
     id: '15',
     title: 'Mentoria de Redação para o ENEM',
-    description: 'Auxilie jovens de escolas públicas na preparação de redações para o ENEM.',
+    description:
+        'Auxilie jovens de escolas públicas na preparação de redações para o ENEM.',
     organizationName: 'Aprovação Já',
     category: 'Educação',
-    imageUrl: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=400',
+    imageUrl:
+        'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=400',
+    logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/161718?v=3',
     date: DateTime.now().add(const Duration(days: 16)),
     startTime: '19:00',
     endTime: '21:00',
@@ -316,10 +362,13 @@ final List<VolunteerOpportunity> mockOpportunities = [
   VolunteerOpportunity(
     id: '16',
     title: 'Corrida Beneficente 5km',
-    description: 'Ajude na organização da corrida solidária com renda revertida para o hospital infantil.',
+    description:
+        'Ajude na organização da corrida solidária com renda revertida para o hospital infantil.',
     organizationName: 'Corra pelo Bem',
     category: 'Esportes',
-    imageUrl: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=400',
+    imageUrl:
+        'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=400',
+    logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/192021?v=3',
     date: DateTime.now().add(const Duration(days: 17)),
     startTime: '06:30',
     endTime: '10:00',
