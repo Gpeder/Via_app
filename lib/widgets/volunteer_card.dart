@@ -141,7 +141,7 @@ class VolunteerCard extends StatelessWidget {
                     SizedBox(width: 20),
                     IconText(text: '$time h', icon: FontAwesomeIcons.clock),
                     Spacer(),
-                    StackAvatar(
+                    StackDetailAvatar(
                       amountCurrent: amountCurrent,
                       amountMax: amountMax,
                     ),

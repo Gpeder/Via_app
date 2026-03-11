@@ -1,14 +1,40 @@
+import 'dart:core';
+import 'dart:math';
+
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:via_app/enum/category_color.dart';
 import 'package:via_app/utils/color.dart';
-import 'package:via_app/widgets/stack_avatar.dart';
+import 'package:via_app/widgets/desc_card.dart';
+import 'package:via_app/widgets/icon_text.dart';
+import 'package:via_app/widgets/vancacy_statuscard.dart';
+import 'package:via_app/model/volunteer_opportunity.dart';
 
-class DetailcardPage extends StatelessWidget {
+class DetailcardPage extends StatefulWidget {
   const DetailcardPage({super.key});
 
   @override
+  State<DetailcardPage> createState() => _DetailcardPageState();
+}
+
+class _DetailcardPageState extends State<DetailcardPage> {
+  late LatLng _randomLocation;
+
+  @override
+  void initState() {
+    super.initState();
+    final random = Random();
+    final lat = -23.5505 + (random.nextDouble() - 0.5) * 0.1;
+    final lng = -46.6333 + (random.nextDouble() - 0.5) * 0.1;
+    _randomLocation = LatLng(lat, lng);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final item = ModalRoute.of(context)!.settings.arguments as VolunteerOpportunity;
+    final cat = CategoryColor.fromDisplayName(item.category);
     final textTheme = Theme.of(context).textTheme;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -45,33 +71,74 @@ class DetailcardPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: height * .3,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  scale: 1,
-                  fit: BoxFit.cover,
-                  image: NetworkImage(
-                    'https://images.unsplash.com/photo-1559027615-cd4628902d4a?q=80&w=400',
+            Stack(
+              children: [
+                Container(
+                  height: height * .3,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      scale: 1,
+                      fit: BoxFit.cover,
+                      image: NetworkImage(
+                        item.imageUrl,
+                      ),
+                    ),
                   ),
                 ),
-              ),
+
+                Positioned(
+                  bottom: 10,
+                  left: 10,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                      color: cat.bgColor,
+                    ),
+                    child: Text(
+                      item.category,
+                      style: TextTheme.of(context).bodyMedium!.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: cat.textColor,
+                      ),
+                    ),
+                  ),
+                ),
+
+                Positioned(
+                  right: 10,
+                  bottom: 10,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                      color: AppColors.white,
+                    ),
+                    child: Text(
+                      '⭐ ${item.rating} (${item.voteCount})',
+                      style: TextTheme.of(
+                        context,
+                      ).bodyMedium!.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ],
             ),
             SizedBox(height: 20),
 
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Distribuição de Alimentos',
+                    item.title,
                     style: textTheme.titleLarge,
                   ),
                   SizedBox(height: 5),
                   Text(
-                    'Banco de Alimentos SP',
+                    item.organizationName,
                     style: textTheme.bodyLarge!.copyWith(
                       color: AppColors.gray200,
                     ),
@@ -84,7 +151,7 @@ class DetailcardPage extends StatelessWidget {
                       Expanded(
                         child: DescCard(
                           textTheme: textTheme,
-                          title: '1,2 km',
+                          title: '${item.distance} km',
                           subtitle: 'de distancia',
                           icon: FontAwesomeIcons.locationDot,
                         ),
@@ -93,8 +160,8 @@ class DetailcardPage extends StatelessWidget {
                       Expanded(
                         child: DescCard(
                           textTheme: textTheme,
-                          title: '3 h',
-                          subtitle: 'de duração',
+                          title: '${item.startTime}-${item.endTime}',
+                          subtitle: 'horário',
                           icon: FontAwesomeIcons.clock,
                         ),
                       ),
@@ -102,7 +169,7 @@ class DetailcardPage extends StatelessWidget {
                       Expanded(
                         child: DescCard(
                           textTheme: textTheme,
-                          title: '6 vagas',
+                          title: '${item.requiredVolunteers} vagas',
                           subtitle: 'de voluntários',
                           icon: FontAwesomeIcons.userGroup,
                         ),
@@ -112,14 +179,14 @@ class DetailcardPage extends StatelessWidget {
 
                   SizedBox(height: 20),
 
-                  VacancyStatusCard(amountCurrent: '10', amountMax: '20'),
+                  VacancyStatusCard(amountCurrent: item.currentVolunteers.toString(), amountMax: item.requiredVolunteers.toString()),
 
                   SizedBox(height: 20),
 
                   Text('Descrição', style: textTheme.titleLarge),
                   SizedBox(height: 10),
                   Text(
-                    'A distribuição de alimentos é um trabalho voluntário que consiste em distribuir alimentos para pessoas em situação de vulnerabilidade social. Os voluntários são responsáveis por separar, embalar e distribuir os alimentos para as pessoas que precisam.',
+                    item.description,
                     style: textTheme.bodyLarge!.copyWith(
                       color: AppColors.gray200,
                     ),
@@ -127,143 +194,75 @@ class DetailcardPage extends StatelessWidget {
                   SizedBox(height: 20),
                   Text('Localização', style: textTheme.titleLarge),
                   SizedBox(height: 10),
-                  Text(
-                    'Rua das Flores, 123 - São Paulo - SP',
-                    style: textTheme.bodyLarge!.copyWith(
-                      color: AppColors.gray200,
+                  SizedBox(
+                    height: 200,
+                    width: double.infinity,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: GoogleMap(
+                        initialCameraPosition: CameraPosition(
+                          target: _randomLocation,
+                          zoom: 20,
+                        ),
+                        markers: {
+                          Marker(
+                            markerId: const MarkerId('random_loc'),
+                            position: _randomLocation,
+                          ),
+                        },
+                        zoomControlsEnabled: false,
+                        myLocationButtonEnabled: false,
+                        scrollGesturesEnabled: false,
+                        zoomGesturesEnabled: false,
+                        tiltGesturesEnabled: false,
+                        rotateGesturesEnabled: false,
+                      ),
                     ),
+                  ),
+                  SizedBox(height: 10),
+                  IconText(
+                    text: item.location,
+                    icon: FontAwesomeIcons.locationDot,
+                  ),
+                  SizedBox(height: 20),
+
+                  CoreCard(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 8,
+                    ),
+                    variant: CoreCardVariant.outline,
+                    backgroundColor: AppColors.gray100.withValues(alpha: .2),
+                    child: ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: CoreIconButton(icon: FontAwesomeIcons.building),
+                      title: Text(
+                        item.organizationName,
+                        style: textTheme.titleMedium,
+                      ),
+                      subtitle: Text(
+                        'Organização verificada ✓',
+                        style: textTheme.bodyMedium!.copyWith(
+                          color: AppColors.gray200,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(height: 20),
+
+                  CoreButton(
+                    fullWidth: true,
+                    label: 'Escolher horário',
+                    variant: CoreButtonVariant.primary,
+                    onPressed: () {},
+                    size: CoreButtonSize.lg,
                   ),
                 ],
               ),
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class VacancyStatusCard extends StatelessWidget {
-  final String amountCurrent;
-  final String amountMax;
-
-  const VacancyStatusCard({
-    super.key,
-    required this.amountCurrent,
-    required this.amountMax,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    return CoreCard(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
-      variant: CoreCardVariant.outline,
-      backgroundColor: AppColors.gray100.withValues(alpha: .2),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              const StackAvatar(),
-              const SizedBox(width: 10),
-              Text('$amountCurrent já inscritos', style: textTheme.bodyLarge),
-              const Spacer(),
-              Text(
-                '$amountMax vagas no total',
-                style: textTheme.bodyMedium!.copyWith(color: AppColors.gray200),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          LinearProgressIndicator(
-            value: int.parse(amountCurrent) / int.parse(amountMax),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            '⚡ Apenas ${int.parse(amountMax) - int.parse(amountCurrent)} vagas restantes!',
-            style: textTheme.bodyLarge,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class StackAvatar extends StatelessWidget {
-  const StackAvatar({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Stack(
-          children: [
-            CoreAvatar.network(
-              size: const Size(30, 30),
-              placeholder: Text('J'),
-              'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/124598?v=3',
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(left: 15),
-              child: CoreAvatar.network(
-                size: const Size(30, 30),
-                placeholder: Text('J'),
-                'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/124597?v=3',
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(left: 30),
-              child: CoreAvatar.network(
-                size: const Size(30, 30),
-                placeholder: Text('J'),
-                'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/124599?v=3',
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
-class DescCard extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final IconData icon;
-  const DescCard({
-    super.key,
-    required this.textTheme,
-    required this.title,
-    required this.subtitle,
-    required this.icon,
-  });
-
-  final TextTheme textTheme;
-
-  @override
-  Widget build(BuildContext context) {
-    return CoreCard(
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-      variant: CoreCardVariant.outline,
-      backgroundColor: AppColors.gray100.withValues(alpha: .2),
-      child: Column(
-        children: [
-          Icon(icon, color: AppColors.primary, size: 24),
-          SizedBox(height: 10),
-          Text(
-            title,
-            style: textTheme.titleMedium,
-            textAlign: TextAlign.center,
-          ),
-          Text(
-            subtitle,
-            style: textTheme.bodyMedium!.copyWith(color: AppColors.gray200),
-            textAlign: TextAlign.center,
-          ),
-        ],
       ),
     );
   }

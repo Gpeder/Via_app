@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                       time: '${item.startTime}-${item.endTime}',
                       category: item.category,
                       onTap: () {
-                        Navigator.pushNamed(context, '/detailcard');
+                        Navigator.pushNamed(context, '/detailcard', arguments: item);
                       },
                     );
                   },
@@ -127,7 +127,7 @@ class _HomePageState extends State<HomePage> {
                     time: '${item.startTime}-${item.endTime}',
                     image: item.imageUrl,
                     onTap: () {
-                      Navigator.pushNamed(context, '/detailcard');
+                      Navigator.pushNamed(context, '/detailcard', arguments: item);
                     },
                     amountCurrent: item.currentVolunteers.toString(),
                     amountMax: item.requiredVolunteers.toString(),
