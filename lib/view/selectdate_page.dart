@@ -26,7 +26,8 @@ class _SelectdatePageState extends State<SelectdatePage> {
     if (!_initialized) {
       final item =
           ModalRoute.of(context)!.settings.arguments as VolunteerOpportunity;
-      if (item.currentVolunteers < item.requiredVolunteers && item.schedules.isNotEmpty) {
+      if (item.currentVolunteers < item.requiredVolunteers &&
+          item.schedules.isNotEmpty) {
         _selectedIndex = 0;
       }
       _initialized = true;
@@ -53,21 +54,21 @@ class _SelectdatePageState extends State<SelectdatePage> {
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               const SizedBox(height: 20),
-              Expanded(
-                child: _buildSchedulesList(item),
-              ),
+              Expanded(child: _buildSchedulesList(item)),
               const SizedBox(height: 20),
               _buildInstructionsCard(context),
             ],
           ),
         ),
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(context),
+      bottomNavigationBar: _buildBottomNavigationBar(context, item),
     );
   }
 
   PreferredSizeWidget _buildAppBar(
-      BuildContext context, VolunteerOpportunity item) {
+    BuildContext context,
+    VolunteerOpportunity item,
+  ) {
     final textTheme = Theme.of(context).textTheme;
     return AppBar(
       elevation: 0,
@@ -99,58 +100,66 @@ class _SelectdatePageState extends State<SelectdatePage> {
       padding: .zero,
       variant: CoreCardVariant.outline,
       backgroundColor: AppColors.gray100.withValues(alpha: .2),
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(12),
-              bottomLeft: Radius.circular(12),
+      child: IntrinsicHeight(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(12),
+                bottomLeft: Radius.circular(12),
+              ),
+              child: Image(
+                image: NetworkImage(item.imageUrl),
+                width: 120,
+                fit: BoxFit.cover,
+              ),
             ),
-            child: Image(
-              image: NetworkImage(item.imageUrl),
-              width: 120,
-              height: 100,
-              fit: BoxFit.cover,
+            const SizedBox(width: 10),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Column(
+                  crossAxisAlignment: .start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 2,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                        color: cat.bgColor,
+                      ),
+                      child: Text(
+                        item.category,
+                        style: textTheme.bodyMedium!.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: cat.textColor,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      item.title,
+                      style: textTheme.titleMedium,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      item.organizationName,
+                      style: textTheme.bodyMedium!.copyWith(
+                        color: AppColors.gray200,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ),
-          const SizedBox(width: 10),
-          Column(
-            crossAxisAlignment: .start,
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8,
-                  vertical: 2,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(12)),
-                  color: cat.bgColor,
-                ),
-                child: Text(
-                  item.category,
-                  style: textTheme.bodyMedium!.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: cat.textColor,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                item.title,
-                style: textTheme.titleMedium,
-                maxLines: 2,
-                softWrap: true,
-                overflow: .ellipsis,
-              ),
-              Text(
-                item.organizationName,
-                style: textTheme.bodyMedium!.copyWith(
-                  color: AppColors.gray200,
-                ),
-              ),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -222,7 +231,10 @@ class _SelectdatePageState extends State<SelectdatePage> {
     );
   }
 
-  Widget _buildBottomNavigationBar(BuildContext context) {
+  Widget _buildBottomNavigationBar(
+    BuildContext context,
+    VolunteerOpportunity item,
+  ) {
     return Container(
       padding: const EdgeInsets.only(left: 20, right: 20, bottom: 30),
       child: CoreButton(
@@ -231,7 +243,7 @@ class _SelectdatePageState extends State<SelectdatePage> {
         label: 'Confirmar',
         onPressed: () {
           if (_selectedIndex != null) {
-            Navigator.pop(context);
+            Navigator.pushNamed(context, '/confirmation', arguments: item);
           }
         },
       ),
