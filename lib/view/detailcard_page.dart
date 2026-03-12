@@ -248,7 +248,7 @@ class _DetailcardPageState extends State<DetailcardPage> {
         Expanded(
           child: DescCard(
             textTheme: textTheme,
-            title: _calculateDuration(item.startTime, item.endTime),
+            title: _calculateDuration(item.schedules.first.startTime, item.schedules.first.endTime),
             subtitle: 'de duração',
             icon: FontAwesomeIcons.clock,
           ),

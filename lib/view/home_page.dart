@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                       title: item.title,
                       name: item.organizationName,
                       distance: item.distance.toString(),
-                      time: '${item.startTime}-${item.endTime}',
+                      time: '${item.schedules.first.startTime}-${item.schedules.first.endTime}',
                       category: item.category,
                       onTap: () {
                         Navigator.pushNamed(context, '/detailcard', arguments: item);
@@ -124,7 +124,7 @@ class _HomePageState extends State<HomePage> {
                     title: item.title,
                     name: item.organizationName,
                     distance: item.distance.toString(),
-                    time: '${item.startTime}-${item.endTime}',
+                    time: '${item.schedules.first.startTime}-${item.schedules.first.endTime}',
                     image: item.imageUrl,
                     onTap: () {
                       Navigator.pushNamed(context, '/detailcard', arguments: item);

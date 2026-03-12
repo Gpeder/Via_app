@@ -1,3 +1,15 @@
+class VolunteerSchedule {
+  final DateTime date;
+  final String startTime;
+  final String endTime;
+
+  VolunteerSchedule({
+    required this.date,
+    required this.startTime,
+    required this.endTime,
+  });
+}
+
 class VolunteerOpportunity {
   final String id;
   final String title;
@@ -6,9 +18,7 @@ class VolunteerOpportunity {
   final String category;
   final String imageUrl;
   final String logoUrl;
-  final DateTime date;
-  final String startTime;
-  final String endTime;
+  final List<VolunteerSchedule> schedules;
   final String location;
   final int requiredVolunteers;
   final int currentVolunteers;
@@ -25,9 +35,7 @@ class VolunteerOpportunity {
     required this.organizationName,
     required this.category,
     required this.imageUrl,
-    required this.date,
-    required this.startTime,
-    required this.endTime,
+    required this.schedules,
     required this.location,
     required this.requiredVolunteers,
     required this.currentVolunteers,
@@ -51,9 +59,18 @@ final List<VolunteerOpportunity> mockOpportunities = [
     imageUrl:
         'https://images.unsplash.com/photo-1548191265-cc70d3d45ba1?q=80&w=400',
     logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/124598?v=3',
-    date: DateTime.now().add(const Duration(days: 3)),
-    startTime: '09:00',
-    endTime: '12:00',
+    schedules: [
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 3)),
+        startTime: '09:00',
+        endTime: '12:00',
+      ),
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 1) + const Duration(days: 3)),
+        startTime: '09:00',
+        endTime: '12:00',
+      ),
+    ],
     location: 'Abrigo Municipal de Animais',
     requiredVolunteers: 5,
     currentVolunteers: 2,
@@ -72,9 +89,18 @@ final List<VolunteerOpportunity> mockOpportunities = [
     imageUrl:
         'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=400',
     logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/124597?v=3',
-    date: DateTime.now().add(const Duration(days: 2)),
-    startTime: '14:00',
-    endTime: '16:00',
+    schedules: [
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 2)),
+        startTime: '14:00',
+        endTime: '16:00',
+      ),
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 1) + const Duration(days: 2)),
+        startTime: '14:00',
+        endTime: '16:00',
+      ),
+    ],
     location: 'Praça da Matriz',
     requiredVolunteers: 10,
     currentVolunteers: 4,
@@ -93,9 +119,18 @@ final List<VolunteerOpportunity> mockOpportunities = [
     imageUrl:
         'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=400',
     logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/124599?v=3',
-    date: DateTime.now().add(const Duration(days: 4)),
-    startTime: '10:00',
-    endTime: '12:00',
+    schedules: [
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 4)),
+        startTime: '10:00',
+        endTime: '12:00',
+      ),
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 1) + const Duration(days: 4)),
+        startTime: '10:00',
+        endTime: '12:00',
+      ),
+    ],
     location: 'Biblioteca Comunitária',
     requiredVolunteers: 6,
     currentVolunteers: 2,
@@ -114,9 +149,18 @@ final List<VolunteerOpportunity> mockOpportunities = [
     imageUrl:
         'https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=400',
     logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/101010?v=3',
-    date: DateTime.now().add(const Duration(days: 5)),
-    startTime: '15:00',
-    endTime: '17:00',
+    schedules: [
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 5)),
+        startTime: '15:00',
+        endTime: '17:00',
+      ),
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 1) + const Duration(days: 5)),
+        startTime: '15:00',
+        endTime: '17:00',
+      ),
+    ],
     location: 'Lar da Terceira Idade',
     requiredVolunteers: 8,
     currentVolunteers: 3,
@@ -134,9 +178,18 @@ final List<VolunteerOpportunity> mockOpportunities = [
     imageUrl:
         'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?q=80&w=400',
     logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/202020?v=3',
-    date: DateTime.now().add(const Duration(days: 6)),
-    startTime: '07:30',
-    endTime: '11:00',
+    schedules: [
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 6)),
+        startTime: '07:30',
+        endTime: '11:00',
+      ),
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 1) + const Duration(days: 6)),
+        startTime: '07:30',
+        endTime: '11:00',
+      ),
+    ],
     location: 'Marginal Oeste',
     requiredVolunteers: 30,
     currentVolunteers: 12,
@@ -155,9 +208,18 @@ final List<VolunteerOpportunity> mockOpportunities = [
     imageUrl:
         'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=400',
     logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/303030?v=3',
-    date: DateTime.now().add(const Duration(days: 7)),
-    startTime: '18:00',
-    endTime: '19:30',
+    schedules: [
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 7)),
+        startTime: '18:00',
+        endTime: '19:30',
+      ),
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 1) + const Duration(days: 7)),
+        startTime: '18:00',
+        endTime: '19:30',
+      ),
+    ],
     location: 'Centro Comunitário',
     requiredVolunteers: 4,
     currentVolunteers: 1,
@@ -176,9 +238,18 @@ final List<VolunteerOpportunity> mockOpportunities = [
     imageUrl:
         'https://images.unsplash.com/photo-1615461066841-6116e61058f4?q=80&w=400',
     logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/404040?v=3',
-    date: DateTime.now().add(const Duration(days: 8)),
-    startTime: '08:00',
-    endTime: '13:00',
+    schedules: [
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 8)),
+        startTime: '08:00',
+        endTime: '13:00',
+      ),
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 1) + const Duration(days: 8)),
+        startTime: '08:00',
+        endTime: '13:00',
+      ),
+    ],
     location: 'Hemocentro Municipal',
     requiredVolunteers: 12,
     currentVolunteers: 5,
@@ -197,9 +268,18 @@ final List<VolunteerOpportunity> mockOpportunities = [
     imageUrl:
         'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?q=80&w=400',
     logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/505050?v=3',
-    date: DateTime.now().add(const Duration(days: 9)),
-    startTime: '09:00',
-    endTime: '16:00',
+    schedules: [
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 9)),
+        startTime: '09:00',
+        endTime: '16:00',
+      ),
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 1) + const Duration(days: 9)),
+        startTime: '09:00',
+        endTime: '16:00',
+      ),
+    ],
     location: 'Largo da Cultura',
     requiredVolunteers: 10,
     currentVolunteers: 4,
@@ -218,9 +298,18 @@ final List<VolunteerOpportunity> mockOpportunities = [
     imageUrl:
         'https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=400',
     logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/606060?v=3',
-    date: DateTime.now().add(const Duration(days: 10)),
-    startTime: '14:00',
-    endTime: '16:00',
+    schedules: [
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 10)),
+        startTime: '14:00',
+        endTime: '16:00',
+      ),
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 1) + const Duration(days: 10)),
+        startTime: '14:00',
+        endTime: '16:00',
+      ),
+    ],
     location: 'Telecentro Municipal',
     requiredVolunteers: 5,
     currentVolunteers: 1,
@@ -239,9 +328,18 @@ final List<VolunteerOpportunity> mockOpportunities = [
     imageUrl:
         'https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=400',
     logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/707070?v=3',
-    date: DateTime.now().add(const Duration(days: 11)),
-    startTime: '16:00',
-    endTime: '18:00',
+    schedules: [
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 11)),
+        startTime: '16:00',
+        endTime: '18:00',
+      ),
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 1) + const Duration(days: 11)),
+        startTime: '16:00',
+        endTime: '18:00',
+      ),
+    ],
     location: 'Campo do Bairro Novo',
     requiredVolunteers: 8,
     currentVolunteers: 3,
@@ -260,9 +358,18 @@ final List<VolunteerOpportunity> mockOpportunities = [
     imageUrl:
         'https://images.unsplash.com/photo-1596464716127-f2a82984de30?q=80&w=400',
     logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/808080?v=3',
-    date: DateTime.now().add(const Duration(days: 12)),
-    startTime: '08:00',
-    endTime: '12:00',
+    schedules: [
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 12)),
+        startTime: '08:00',
+        endTime: '12:00',
+      ),
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 1) + const Duration(days: 12)),
+        startTime: '08:00',
+        endTime: '12:00',
+      ),
+    ],
     location: 'Associação de Moradores',
     requiredVolunteers: 20,
     currentVolunteers: 7,
@@ -281,9 +388,18 @@ final List<VolunteerOpportunity> mockOpportunities = [
     imageUrl:
         'https://images.unsplash.com/photo-1574158622682-e40e69881006?q=80&w=400',
     logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/909090?v=3',
-    date: DateTime.now().add(const Duration(days: 13)),
-    startTime: '08:00',
-    endTime: '14:00',
+    schedules: [
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 13)),
+        startTime: '08:00',
+        endTime: '14:00',
+      ),
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 1) + const Duration(days: 13)),
+        startTime: '08:00',
+        endTime: '14:00',
+      ),
+    ],
     location: 'Clínica Veterinária Popular',
     requiredVolunteers: 10,
     currentVolunteers: 4,
@@ -303,9 +419,18 @@ final List<VolunteerOpportunity> mockOpportunities = [
     imageUrl:
         'https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=400',
     logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/101112?v=3',
-    date: DateTime.now().add(const Duration(days: 14)),
-    startTime: '09:00',
-    endTime: '15:00',
+    schedules: [
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 14)),
+        startTime: '09:00',
+        endTime: '15:00',
+      ),
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 1) + const Duration(days: 14)),
+        startTime: '09:00',
+        endTime: '15:00',
+      ),
+    ],
     location: 'Praça Central',
     requiredVolunteers: 15,
     currentVolunteers: 6,
@@ -325,9 +450,18 @@ final List<VolunteerOpportunity> mockOpportunities = [
     imageUrl:
         'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=400',
     logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/131415?v=3',
-    date: DateTime.now().add(const Duration(days: 15)),
-    startTime: '07:00',
-    endTime: '11:30',
+    schedules: [
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 15)),
+        startTime: '07:00',
+        endTime: '11:30',
+      ),
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 1) + const Duration(days: 15)),
+        startTime: '07:00',
+        endTime: '11:30',
+      ),
+    ],
     location: 'Reserva Ambiental Norte',
     requiredVolunteers: 25,
     currentVolunteers: 10,
@@ -347,9 +481,18 @@ final List<VolunteerOpportunity> mockOpportunities = [
     imageUrl:
         'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=400',
     logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/161718?v=3',
-    date: DateTime.now().add(const Duration(days: 16)),
-    startTime: '19:00',
-    endTime: '21:00',
+    schedules: [
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 16)),
+        startTime: '19:00',
+        endTime: '21:00',
+      ),
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 1) + const Duration(days: 16)),
+        startTime: '19:00',
+        endTime: '21:00',
+      ),
+    ],
     location: 'Escola Estadual São José',
     requiredVolunteers: 6,
     currentVolunteers: 2,
@@ -369,9 +512,18 @@ final List<VolunteerOpportunity> mockOpportunities = [
     imageUrl:
         'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=400',
     logoUrl: 'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/192021?v=3',
-    date: DateTime.now().add(const Duration(days: 17)),
-    startTime: '06:30',
-    endTime: '10:00',
+    schedules: [
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 17)),
+        startTime: '06:30',
+        endTime: '10:00',
+      ),
+      VolunteerSchedule(
+        date: DateTime.now().add(const Duration(days: 1) + const Duration(days: 17)),
+        startTime: '06:30',
+        endTime: '10:00',
+      ),
+    ],
     location: 'Parque da Cidade',
     requiredVolunteers: 20,
     currentVolunteers: 8,

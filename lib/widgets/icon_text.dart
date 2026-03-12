@@ -1,23 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:via_app/utils/color.dart';
+
+enum TextSize {
+  md,
+  lg,
+}
 
 class IconText extends StatelessWidget {
   final String text;
   final IconData icon;
+  final TextSize size;
 
-  const IconText({super.key, required this.text, required this.icon});
+  const IconText({
+    super.key,
+    required this.text,
+    required this.icon,
+    this.size = TextSize.md,
+  });
 
   @override
   Widget build(BuildContext context) {
+    TextStyle textStyle;
+    double iconSize;
+    
+    switch (size) {
+      case TextSize.lg:
+        textStyle = Theme.of(context).textTheme.bodyLarge!;
+        iconSize = 20.0;
+        break;
+      case TextSize.md:
+        textStyle = Theme.of(context).textTheme.bodyMedium!;
+        iconSize = 16.0;
+        break;
+    }
+
     return Row(
       children: [
-        Icon(icon, size: 16, color: AppColors.gray200),
-        SizedBox(width: 5),
+        Icon(icon, size: iconSize, color: textStyle.color),
+        const SizedBox(width: 5),
         Text(
           text,
-          style: TextTheme.of(
-            context,
-          ).bodyMedium!.copyWith(color: AppColors.gray200),
+          style: textStyle,
         ),
       ],
     );
