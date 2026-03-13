@@ -34,6 +34,7 @@ class IconText extends StatelessWidget {
     }
 
     return Row(
+      mainAxisSize: .min,
       children: [
         Icon(icon, size: iconSize, color: textStyle.color),
         const SizedBox(width: 5),

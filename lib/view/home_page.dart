@@ -51,6 +51,7 @@ class _HomePageState extends State<HomePage> {
                   itemBuilder: (context, index) {
                     final category = categoryItem[index];
                     return CoreChip(
+                      radius: CoreChipRadius.lg,
                       size: CoreChipSize.lg,
                       selected: _selectedCategoryIndex == index,
                       onSelected: (value) {

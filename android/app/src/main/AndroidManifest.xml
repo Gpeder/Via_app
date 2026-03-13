@@ -37,7 +37,7 @@
         <!-- Placeholder for Google Maps API Key to prevent crash -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="SUA_CHAVE_API_AQUI_PARA_NAO_CRASHAR" />
+            android:value="AIzaSyDZpZJZJZJZJZJZJZJZJZJZJZJZJZJZJZJ" />
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and

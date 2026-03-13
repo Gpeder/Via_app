@@ -54,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
       _loading = false;
     });
 
-    Navigator.pushNamed(context, '/home');
+    Navigator.pushNamed(context, '/root');
   }
 
   @override
