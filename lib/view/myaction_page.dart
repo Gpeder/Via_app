@@ -1,15 +1,29 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:via_app/helper/date_helper.dart';
+import 'package:via_app/model/volunteer_status.dart';
 import 'package:via_app/utils/color.dart';
-import 'package:via_app/widgets/icon_text.dart';
+import 'package:via_app/widgets/status_card.dart';
 
-class MyactionPage extends StatelessWidget {
+class MyactionPage extends StatefulWidget {
   const MyactionPage({super.key});
 
   @override
+  State<MyactionPage> createState() => _MyactionPageState();
+}
+
+class _MyactionPageState extends State<MyactionPage> {
+  @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final item = mockUserActions;
+    final agendadas =
+        item.where((e) => e.status == ActionStatus.agendada).toList();
+    final concluidas =
+        item.where((e) => e.status == ActionStatus.concluida).toList();
+    final canceladas =
+        item.where((e) => e.status == ActionStatus.cancelada).toList();
+
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -22,7 +36,7 @@ class MyactionPage extends StatelessWidget {
             children: [
               Text('Minhas ações', style: textTheme.titleLarge),
               Text(
-                '1 compromisso agendado',
+                '${agendadas.length} compromisso${agendadas.length == 1 ? '' : 's'} agendado${agendadas.length == 1 ? '' : 's'}',
                 style: textTheme.bodyLarge!.copyWith(color: AppColors.gray200),
               ),
             ],
@@ -42,19 +56,29 @@ class MyactionPage extends StatelessWidget {
                     vertical: 20,
                   ),
                   variant: CoreCardVariant.elevated,
-                  backgroundColor: Color(0xffFFE8A3),
+                  backgroundColor: const Color(0xffFFE8A3),
                   child: IntrinsicHeight(
                     child: Row(
                       children: [
                         Expanded(
-                          child: _cardItem(textTheme, '2', 'Concluídas'),
+                          child: _cardItem(
+                            textTheme,
+                            concluidas.length.toString(),
+                            'Concluídas',
+                          ),
                         ),
                         const CoreDivider.vertical(
                           thickness: 1.0,
                           color: AppColors.primaryDark,
                           radius: BorderRadius.all(Radius.circular(20)),
                         ),
-                        Expanded(child: _cardItem(textTheme, '2', 'Agendadas')),
+                        Expanded(
+                          child: _cardItem(
+                            textTheme,
+                            agendadas.length.toString(),
+                            'Agendadas',
+                          ),
+                        ),
                         const CoreDivider.vertical(
                           thickness: 1.0,
                           color: AppColors.primaryDark,
@@ -84,24 +108,9 @@ class MyactionPage extends StatelessWidget {
               Expanded(
                 child: TabBarView(
                   children: [
-                    SingleChildScrollView(
-                      padding: .symmetric(horizontal: 16, vertical: 20),
-                      child: Column(
-                        children: [
-                          Column(
-                            children: [
-                              CardStatus(),
-                              SizedBox(height: 10),
-                              CardStatus(),
-                              SizedBox(height: 10),
-                              CardStatus(),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Center(child: Text('Lista de agendadas')),
-                    const Center(child: Text('Resumo de horas')),
+                    _buildStatusList(agendadas),
+                    _buildStatusList(concluidas),
+                    _buildStatusList(canceladas),
                   ],
                 ),
               ),
@@ -109,6 +118,36 @@ class MyactionPage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildStatusList(List<UserAction> actions) {
+    if (actions.isEmpty) {
+      return Center(
+        child: Text(
+          'Nenhuma atividade encontrada',
+          style: TextStyle(color: AppColors.gray200),
+        ),
+      );
+    }
+    return ListView.builder(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+      itemCount: actions.length,
+      itemBuilder: (context, index) {
+        final action = actions[index];
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 16),
+          child: CardStatus(
+            title: action.opportunity.title,
+            organizationName: action.opportunity.organizationName,
+            date: DateHelper.formatShortDate(action.schedule.date),
+            startTime: action.schedule.startTime.toString(),
+            endTime: action.schedule.endTime.toString(),
+            status: StatusCardType.values.byName(action.status.name),
+            imageUrl: action.opportunity.imageUrl,
+          ),
+        );
+      },
     );
   }
 
@@ -125,91 +164,6 @@ class MyactionPage extends StatelessWidget {
           style: textTheme.bodyLarge!.copyWith(color: AppColors.gray200),
         ),
       ],
-    );
-  }
-}
-
-class CardStatus extends StatelessWidget {
-  const CardStatus({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    return CoreCard(
-      padding: .symmetric(horizontal: 10, vertical: 10),
-      variant: CoreCardVariant.outline,
-      backgroundColor: AppColors.white,
-      child: Column(
-        children: [
-          Row(
-            children: [
-              ClipRRect(
-                borderRadius: .all(Radius.circular(12)),
-                child: Image.network(
-                  'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/124598?v=3',
-                  width: 140,
-                  height: 160,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              Padding(
-                padding: .only(left: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text('Plantio de Árvores', style: textTheme.titleMedium),
-                    Text(
-                      'Instituto verde vida',
-                      style: textTheme.bodyMedium!.copyWith(
-                        color: AppColors.gray200,
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    IconText(
-                      text: 'Dom, 8 mar',
-                      icon: FontAwesomeIcons.calendar,
-                    ),
-                    SizedBox(height: 5),
-                    IconText(text: '8:00 - 11:00', icon: FontAwesomeIcons.clock),
-                    SizedBox(height: 10),
-                    Container(
-                      padding: .symmetric(horizontal: 10, vertical: 5),
-                      decoration: BoxDecoration(
-                        color: Color(0xffE8F5E9),
-                        borderRadius: .all(Radius.circular(12)),
-                      ),
-                      child: Text('Confirmado', style: textTheme.bodyMedium),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 10),
-          Row(
-            children: [
-              Expanded(
-                child: CoreButton(
-                  label: 'Check-in',
-                  icon: FontAwesomeIcons.check,
-                  variant: CoreButtonVariant.primary,
-                  onPressed: () {},
-                ),
-              ),
-              SizedBox(width: 10),
-              Expanded(
-                child: CoreButton(
-                  label: 'Cancelar',
-                  icon: FontAwesomeIcons.circleCheck,
-                  variant: CoreButtonVariant.outline,
-                  onPressed: () {},
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
     );
   }
 }
