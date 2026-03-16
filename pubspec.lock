@@ -62,10 +62,10 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "955bde550a09de3d55eeb051f18dec317b872ce2"
+      resolved-ref: "740067631552b62b56622bff2f8ed21190c4aa49"
       url: "https://github.com/Gpeder/core_ui"
     source: git
-    version: "0.0.6"
+    version: "0.0.7"
   crypto:
     dependency: transitive
     description:
