@@ -9,12 +9,16 @@ class IconText extends StatelessWidget {
   final String text;
   final IconData icon;
   final TextSize size;
+  final Color? iconColor;
+  final Color? textColor;
 
   const IconText({
     super.key,
     required this.text,
     required this.icon,
     this.size = TextSize.md,
+    this.iconColor,
+    this.textColor,
   });
 
   @override
@@ -36,11 +40,11 @@ class IconText extends StatelessWidget {
     return Row(
       mainAxisSize: .min,
       children: [
-        Icon(icon, size: iconSize, color: textStyle.color),
+        Icon(icon, size: iconSize, color: iconColor ?? textStyle.color),
         const SizedBox(width: 5),
         Text(
           text,
-          style: textStyle,
+          style: textStyle.copyWith(color: textColor),
         ),
       ],
     );

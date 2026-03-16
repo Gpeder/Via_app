@@ -17,12 +17,15 @@ class _MyactionPageState extends State<MyactionPage> {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final item = mockUserActions;
-    final agendadas =
-        item.where((e) => e.status == ActionStatus.agendada).toList();
-    final concluidas =
-        item.where((e) => e.status == ActionStatus.concluida).toList();
-    final canceladas =
-        item.where((e) => e.status == ActionStatus.cancelada).toList();
+    final agendadas = item
+        .where((e) => e.status == ActionStatus.agendada)
+        .toList();
+    final concluidas = item
+        .where((e) => e.status == ActionStatus.concluida)
+        .toList();
+    final canceladas = item
+        .where((e) => e.status == ActionStatus.cancelada)
+        .toList();
 
     return DefaultTabController(
       length: 3,
@@ -68,8 +71,8 @@ class _MyactionPageState extends State<MyactionPage> {
                           ),
                         ),
                         const CoreDivider.vertical(
-                          thickness: 1.0,
-                          color: AppColors.primaryDark,
+                          thickness: 2,
+                          color: AppColors.primary,
                           radius: BorderRadius.all(Radius.circular(20)),
                         ),
                         Expanded(
@@ -80,8 +83,8 @@ class _MyactionPageState extends State<MyactionPage> {
                           ),
                         ),
                         const CoreDivider.vertical(
-                          thickness: 1.0,
-                          color: AppColors.primaryDark,
+                          thickness: 2,
+                          color: AppColors.primary,
                           radius: BorderRadius.all(Radius.circular(20)),
                         ),
                         Expanded(child: _cardItem(textTheme, '2', 'Horas')),
