@@ -13,6 +13,7 @@ Para as imagens não ficarem "tudo junto", usamos tabelas. Isso força o alinham
 | <img src="assets/images/home.png" width="200"> | <img src="assets/images/homefilter.png" width="200"> | <img src="assets/images/map.png" width="200"> |
 
 <br> | **Minhas Ações** | **Perfil** | **Editar Perfil** |
+
 | :---: | :---: | :---: |
 | <img src="assets/images/action.png" width="200"> | <img src="assets/images/profile.png" width="200"> | <img src="assets/images/editprofile.png" width="200"> |
 
