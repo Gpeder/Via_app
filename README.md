@@ -52,6 +52,3 @@ https://github.com/Gpeder/via_app/blob/main/assets/images/video.mp4
 * **Flutter Map:** Visualização geográfica das vagas.
 * **Lucide Icons:** Conjunto de ícones modernos.
 
----
-
-**Desenvolvido com ❤️ por Gustavo.**
