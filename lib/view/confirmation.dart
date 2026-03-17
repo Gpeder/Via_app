@@ -175,7 +175,7 @@ class ConfirmationPage extends StatelessWidget {
                 size: CoreButtonSize.lg,
                 label: 'Voltar para a página inicial',
                 onPressed: () {
-                  Navigator.pushNamed(context, '/home');
+                  Navigator.pushNamed(context, '/root');
                 },
               ),
             ],
