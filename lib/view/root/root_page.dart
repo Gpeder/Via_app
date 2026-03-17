@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:via_app/utils/color.dart';
 import 'package:via_app/view/home_page.dart';
 import 'package:via_app/view/map_page.dart';
@@ -51,28 +51,28 @@ class _RootPageState extends State<RootPage> {
           BottomNavigationBarItem(
             icon: Padding(
               padding: EdgeInsets.only(bottom: 4),
-              child: Icon(FontAwesomeIcons.house),
+              child: Icon(LucideIcons.house),
             ),
             label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Padding(
               padding: EdgeInsets.only(bottom: 4),
-              child: Icon(FontAwesomeIcons.map),
+              child: Icon(LucideIcons.map),
             ),
             label: 'Mapa',
           ),
           BottomNavigationBarItem(
             icon: Padding(
               padding: EdgeInsets.only(bottom: 4),
-              child: Icon(FontAwesomeIcons.calendar),
+              child: Icon(LucideIcons.calendar),
             ),
             label: 'Minhas ações',
           ),
           BottomNavigationBarItem(
             icon: Padding(
               padding: EdgeInsets.only(bottom: 4),
-              child: Icon(FontAwesomeIcons.user),
+              child: Icon(LucideIcons.user),
             ),
             label: 'Perfil',
           ),

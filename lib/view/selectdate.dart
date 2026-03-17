@@ -1,6 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:via_app/enum/category_color.dart';
 
 import 'package:via_app/helper/date_helper.dart';
@@ -74,8 +74,8 @@ class _SelectdatePageState extends State<SelectdatePage> {
       elevation: 0,
       leading: UnconstrainedBox(
         child: CoreIconButton(
-          size: .sm,
-          icon: FontAwesomeIcons.chevronLeft,
+          size: CoreIconButtonSize.sm,
+          icon: LucideIcons.chevronLeft,
           variant: CoreIconButtonVariant.secondary,
           borderRadius: 100,
           onPressed: () => Navigator.pop(context),
@@ -97,7 +97,8 @@ class _SelectdatePageState extends State<SelectdatePage> {
     final cat = CategoryColor.fromDisplayName(item.category);
 
     return CoreCard(
-      padding: .zero,
+      radius: CoreCardRadius.lg,
+      padding: EdgeInsets.zero,
       variant: CoreCardVariant.outline,
       backgroundColor: AppColors.gray100.withValues(alpha: .2),
       child: IntrinsicHeight(
@@ -120,7 +121,7 @@ class _SelectdatePageState extends State<SelectdatePage> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: Column(
-                  crossAxisAlignment: .start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
                       padding: const EdgeInsets.symmetric(
@@ -201,30 +202,28 @@ class _SelectdatePageState extends State<SelectdatePage> {
   Widget _buildInstructionsCard(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return CoreCard(
+      radius: CoreCardRadius.lg,
       backgroundColor: AppColors.gray100.withValues(alpha: .2),
-      padding: .symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       variant: CoreCardVariant.outline,
       child: Column(
-        crossAxisAlignment: .start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('Oque esperar', style: textTheme.titleMedium),
           const SizedBox(height: 10),
           const IconText(
-            size: .md,
             text: 'Leve roupas confortáveis e calçado fechado',
-            icon: FontAwesomeIcons.circleCheck,
+            icon: LucideIcons.circleCheck,
           ),
           const SizedBox(height: 5),
           const IconText(
-            size: .md,
             text: 'Chegue 15 minutos antes do horário',
-            icon: FontAwesomeIcons.circleCheck,
+            icon: LucideIcons.circleCheck,
           ),
           const SizedBox(height: 5),
           const IconText(
-            size: .md,
             text: 'Você receberá confirmação por e-mail',
-            icon: FontAwesomeIcons.circleCheck,
+            icon: LucideIcons.circleCheck,
           ),
         ],
       ),
@@ -239,7 +238,7 @@ class _SelectdatePageState extends State<SelectdatePage> {
       padding: const EdgeInsets.only(left: 20, right: 20, bottom: 30),
       child: CoreButton(
         variant: CoreButtonVariant.primary,
-        size: .lg,
+        size: CoreButtonSize.lg,
         label: 'Confirmar',
         onPressed: () {
           if (_selectedIndex != null) {

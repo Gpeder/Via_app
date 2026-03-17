@@ -17,6 +17,7 @@ class VacancyStatusCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return CoreCard(
+      radius: CoreCardRadius.lg,
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
       variant: CoreCardVariant.outline,
       backgroundColor: AppColors.gray100.withValues(alpha: .2),

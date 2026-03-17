@@ -1,6 +1,7 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart' show LucideIcons;
+import 'package:via_app/enum/category_color.dart';
 import 'package:via_app/model/user_model.dart';
 import 'package:via_app/utils/color.dart';
 import 'package:via_app/widgets/icon_text.dart';
@@ -29,9 +30,11 @@ class _ProfilePageState extends State<ProfilePage> {
         actionsPadding: const EdgeInsets.only(right: 16),
         actions: [
           IconButton(
-            icon: const Icon(FontAwesomeIcons.penToSquare),
+            icon: const Icon(LucideIcons.pencil),
             color: AppColors.white,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/edit_profile');
+            },
           ),
         ],
       ),
@@ -72,36 +75,53 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       const SizedBox(height: 20),
                       Row(
-                        mainAxisAlignment: .spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             'Causas que me movem',
                             style: textTheme.titleMedium,
                           ),
                           CoreButton(
-                            onPressed: () {},
-                            variant: .link,
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/edit_profile');
+                            },
+                            variant: CoreButtonVariant.link,
                             label: 'Editar',
                           ),
                         ],
                       ),
                       const SizedBox(height: 10),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 5,
-                        ),
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(12)),
-                          color: AppColors.gray100,
-                        ),
-                        child: Text(
-                          'Meio Ambiente',
-                          style: textTheme.bodyMedium!.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.gray200,
-                          ),
-                        ),
+                      Wrap(
+                        spacing: 8,
+                        runSpacing: 8,
+                        children: CategoryColor.values
+                            .where((category) {
+                              return user.interests.contains(
+                                category.displayName,
+                              );
+                            })
+                            .map((category) {
+                              return Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 6,
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(12),
+                                  ),
+                                  color: category.bgColor,
+                                ),
+                                child: Text(
+                                  category.displayName,
+                                  style: textTheme.bodyMedium!.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: category.textColor,
+                                  ),
+                                ),
+                              );
+                            })
+                            .toList(),
                       ),
                       const SizedBox(height: 20),
                       _buildAwardCard(textTheme),
@@ -137,7 +157,7 @@ class _ProfilePageState extends State<ProfilePage> {
             shape: BoxShape.circle,
           ),
           child: CoreAvatar.network(
-            shape: .circle,
+            shape: BoxShape.circle,
             size: const Size(80, 80),
             placeholder: Center(child: Text(user.name[0])),
             user.imageUrl ?? '',
@@ -154,7 +174,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             const SizedBox(height: 5),
             IconText(
-              icon: FontAwesomeIcons.locationDot,
+              icon: LucideIcons.mapPin,
               text: user.location,
               iconColor: AppColors.background,
               textColor: AppColors.background,
@@ -167,42 +187,36 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget _buildStatsCard(TextTheme textTheme) {
     return CoreCard(
-      radius: .lg,
-      variant: .elevated,
+      radius: CoreCardRadius.lg,
+      variant: CoreCardVariant.elevated,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       child: IntrinsicHeight(
         child: Row(
-          mainAxisAlignment: .spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             _buildStatItem(
               textTheme,
               const Color(0xff3e75ee),
               const Color(0xffE4EBFC),
-              FontAwesomeIcons.clock,
+              LucideIcons.clock,
               '${user.totalHours}H',
               'Horas',
             ),
-            const CoreDivider.vertical(
-              thickness: 1,
-              color: AppColors.gray100,
-            ),
+            const CoreDivider.vertical(thickness: 1, color: AppColors.gray100),
             _buildStatItem(
               textTheme,
               const Color(0xff49B771),
               const Color(0xffE2F3E8),
-              FontAwesomeIcons.award,
+              LucideIcons.graduationCap,
               '${user.activitiesCount}',
               'Atividades',
             ),
-            const CoreDivider.vertical(
-              thickness: 1,
-              color: AppColors.gray100,
-            ),
+            const CoreDivider.vertical(thickness: 1, color: AppColors.gray100),
             _buildStatItem(
               textTheme,
               const Color(0xffFFC107),
               const Color(0xffFFF3E0),
-              FontAwesomeIcons.star,
+              LucideIcons.star,
               '${user.impactPoints}',
               'Impacto',
             ),
@@ -228,8 +242,10 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Icon(icon, size: 20, color: iconColor),
         ),
         const SizedBox(height: 10),
-        Text(title,
-            style: textTheme.titleLarge!.copyWith(fontWeight: FontWeight.w900)),
+        Text(
+          title,
+          style: textTheme.titleLarge!.copyWith(fontWeight: FontWeight.w900),
+        ),
         const SizedBox(height: 5),
         Text(
           subtitle,
@@ -246,8 +262,8 @@ class _ProfilePageState extends State<ProfilePage> {
         end: Alignment.bottomRight,
         colors: [Color(0xffF2BE24), Color(0xffFFE8A3)],
       ),
-      radius: .lg,
-      variant: .elevated,
+      radius: CoreCardRadius.lg,
+      variant: CoreCardVariant.elevated,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       child: Row(
         children: [
@@ -260,7 +276,7 @@ class _ProfilePageState extends State<ProfilePage> {
               shape: BoxShape.circle,
             ),
             child: const Icon(
-              FontAwesomeIcons.award,
+              LucideIcons.graduationCap,
               size: 20,
               color: AppColors.gray200,
             ),
@@ -270,10 +286,7 @@ class _ProfilePageState extends State<ProfilePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Voluntária Ativa 🏆',
-                  style: textTheme.titleMedium,
-                ),
+                Text('Voluntária Ativa 🏆', style: textTheme.titleMedium),
                 Text(
                   'Você está entre os top 10% voluntários da sua cidade!',
                   style: textTheme.bodyMedium!.copyWith(
@@ -299,37 +312,37 @@ class _ProfilePageState extends State<ProfilePage> {
         const SizedBox(height: 10),
         _buildConfigItem(
           textTheme,
-          FontAwesomeIcons.bell,
+          LucideIcons.bell,
           'Notificações',
           'Alerta de novas oportunidades',
         ),
         const SizedBox(height: 10),
         _buildConfigItem(
           textTheme,
-          FontAwesomeIcons.locationDot,
+          LucideIcons.mapPin,
           'Localização',
           'Atualizar minha cidade',
         ),
         _buildConfigItem(
           textTheme,
-          FontAwesomeIcons.heart,
+          LucideIcons.heart,
           'Causas favoritas',
           'Gerenciar interesses',
         ),
         _buildConfigItem(
           textTheme,
-          FontAwesomeIcons.shield,
+          LucideIcons.shield,
           'Privacidade',
           'Dados e segurança',
         ),
         const SizedBox(height: 20),
         CoreButton(
-          variant: .destructive,
+          variant: CoreButtonVariant.destructive,
           fullWidth: true,
-          size: .lg,
+          size: CoreButtonSize.lg,
           label: 'Sair da conta',
           onPressed: () {},
-        )
+        ),
       ],
     );
   }
@@ -359,7 +372,7 @@ class _ProfilePageState extends State<ProfilePage> {
       trailing: const Padding(
         padding: EdgeInsets.only(right: 8),
         child: Icon(
-          FontAwesomeIcons.chevronRight,
+          LucideIcons.chevronRight,
           size: 16,
           color: Color.fromRGBO(158, 158, 158, 0.5),
         ),

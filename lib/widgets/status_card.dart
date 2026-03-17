@@ -1,6 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:via_app/utils/color.dart';
 import 'package:via_app/widgets/icon_text.dart';
 
@@ -54,6 +54,7 @@ class CardStatus extends StatelessWidget {
     final config = status.config;
 
     return CoreCard(
+      radius: CoreCardRadius.lg,
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       variant: CoreCardVariant.outline,
       backgroundColor: AppColors.white,
@@ -91,13 +92,12 @@ class CardStatus extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      IconText(text: date, icon: FontAwesomeIcons.calendar),
+                      IconText(text: date, icon: LucideIcons.calendar1),
                       const SizedBox(height: 5),
                       IconText(
                         text: '$startTime - $endTime',
-                        icon: FontAwesomeIcons.clock,
+                        icon: LucideIcons.clock,
                       ),
-                      const SizedBox(height: 10),
                       Container(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 10,
@@ -131,7 +131,7 @@ class CardStatus extends StatelessWidget {
                   Expanded(
                     child: CoreButton(
                       label: 'Check-in',
-                      icon: FontAwesomeIcons.check,
+                      icon: LucideIcons.check,
                       variant: CoreButtonVariant.primary,
                       onPressed: () {},
                     ),
@@ -140,7 +140,7 @@ class CardStatus extends StatelessWidget {
                   Expanded(
                     child: CoreButton(
                       label: 'Cancelar',
-                      icon: FontAwesomeIcons.circleXmark,
+                      icon: LucideIcons.x,
                       variant: CoreButtonVariant.outline,
                       onPressed: () {},
                     ),
@@ -152,6 +152,7 @@ class CardStatus extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 10),
               child: CoreCard(
+                radius: CoreCardRadius.lg,
                 backgroundColor: const Color(0xffF6F7F9),
                 variant: CoreCardVariant.elevated,
                 padding: const EdgeInsets.symmetric(

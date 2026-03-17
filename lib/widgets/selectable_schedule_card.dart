@@ -1,6 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import 'package:via_app/utils/color.dart';
 import 'package:via_app/widgets/icon_text.dart';
@@ -27,24 +27,22 @@ class SelectableScheduleCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return CoreCard(
       variant: CoreCardVariant.outline,
+      radius: CoreCardRadius.lg,
       backgroundColor: selected
           ? AppColors.primary.withValues(alpha: .2)
           : AppColors.gray100.withValues(alpha: .2),
-      padding: .zero,
+      padding: EdgeInsets.zero,
       child: ListTile(
         onTap: onTap,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
         title: IconText(
-          size: TextSize.lg,
           text: date,
-          icon: FontAwesomeIcons.calendar,
+          icon: LucideIcons.calendar1,
         ),
         subtitle: Padding(
           padding: const EdgeInsets.only(top: 5),
           child: IconText(
-            size: TextSize.lg,
             text: time,
-            icon: FontAwesomeIcons.clock,
+            icon: LucideIcons.clock,
           ),
         ),
         leading: CoreCheckBox(value: selected, onChanged: onChanged),

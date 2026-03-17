@@ -1,6 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart' show LucideIcons;
 import 'package:via_app/utils/color.dart';
 import 'package:via_app/widgets/icon_text.dart';
 
@@ -29,6 +29,7 @@ class SecondaryVolunteerCard extends StatelessWidget {
     return SizedBox(
       width: 220,
       child: CoreCard(
+        radius: CoreCardRadius.lg,
         onTap: onTap,
         variant: CoreCardVariant.elevated,
         padding: EdgeInsets.zero,
@@ -90,10 +91,10 @@ class SecondaryVolunteerCard extends StatelessWidget {
                     children: [
                       IconText(
                         text: '$distance km',
-                        icon: FontAwesomeIcons.locationDot,
+                        icon: LucideIcons.mapPin,
                       ),
-                      SizedBox(width: 10),
-                      IconText(text: time, icon: FontAwesomeIcons.clock),
+                      const SizedBox(width: 10),
+                      IconText(text: time, icon: LucideIcons.clock),
                     ],
                   ),
                 ],

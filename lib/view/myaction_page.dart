@@ -54,12 +54,12 @@ class _MyactionPageState extends State<MyactionPage> {
                   vertical: 20,
                 ),
                 child: CoreCard(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 20,
-                  ),
+                  radius: CoreCardRadius.lg,
                   variant: CoreCardVariant.elevated,
-                  backgroundColor: const Color(0xffFFE8A3),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 16,
+                  ),
                   child: IntrinsicHeight(
                     child: Row(
                       children: [

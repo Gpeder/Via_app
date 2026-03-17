@@ -1,6 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:via_app/model/categories.dart';
 import 'package:via_app/model/volunteer_opportunity.dart';
 import 'package:via_app/utils/color.dart';
@@ -114,6 +114,7 @@ class _HomePageState extends State<HomePage> {
               ),
               SizedBox(height: 10),
               ListView.separated(
+                padding: const EdgeInsets.only(bottom: 20),
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 separatorBuilder: (context, index) =>
@@ -185,8 +186,8 @@ class _HomePageState extends State<HomePage> {
                 size: CoreInputSize.lg,
                 variant: CoreInputVariant.filled,
                 controller: TextEditingController(),
-                prefixIcon: FontAwesomeIcons.magnifyingGlass,
-                suffixIcon: FontAwesomeIcons.sliders,
+                prefixIcon: LucideIcons.search,
+                suffixIcon: LucideIcons.slidersHorizontal,
                 onSuffixTap: () => showModalBottomSheet(
                   context: context,
                   builder: (context) => buildFilterModal(context),
@@ -256,12 +257,12 @@ class _HomePageState extends State<HomePage> {
         children: [
           Row(
             children: [
-              const Icon(FontAwesomeIcons.sliders, size: 20),
+              const Icon(LucideIcons.slidersHorizontal, size: 20),
               const SizedBox(width: 12),
               Text('Filtros', style: textTheme.titleLarge),
               const Spacer(),
               CoreIconButton(
-                icon: FontAwesomeIcons.xmark,
+                icon: LucideIcons.x,
                 variant: CoreIconButtonVariant.secondary,
                 size: CoreIconButtonSize.sm,
                 borderRadius: 100,

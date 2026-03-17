@@ -1,6 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart' show LucideIcons;
 import 'package:via_app/enum/category_color.dart';
 import 'package:via_app/utils/color.dart';
 import 'package:via_app/widgets/icon_text.dart';
@@ -41,6 +41,7 @@ class VolunteerCard extends StatelessWidget {
     final cat = CategoryColor.fromDisplayName(category);
 
     return CoreCard(
+      radius: CoreCardRadius.lg,
       onTap: onTap,
       variant: CoreCardVariant.elevated,
       padding: EdgeInsets.zero,
@@ -86,7 +87,7 @@ class VolunteerCard extends StatelessWidget {
                 top: 10,
                 child: CoreIconButton(
                   variant: CoreIconButtonVariant.secondary,
-                  icon: FontAwesomeIcons.heart,
+                  icon: LucideIcons.heart,
                   onPressed: favTap,
                 ),
               ),
@@ -136,10 +137,10 @@ class VolunteerCard extends StatelessWidget {
                   children: [
                     IconText(
                       text: '$distance km',
-                      icon: FontAwesomeIcons.locationDot,
+                      icon: LucideIcons.mapPin,
                     ),
-                    SizedBox(width: 20),
-                    IconText(text: '$time h', icon: FontAwesomeIcons.clock),
+                    const SizedBox(width: 20),
+                    IconText(text: '$time h', icon: LucideIcons.clock),
                     Spacer(),
                     StackDetailAvatar(
                       amountCurrent: amountCurrent,

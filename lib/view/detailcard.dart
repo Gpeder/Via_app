@@ -3,8 +3,8 @@ import 'dart:math';
 
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:via_app/enum/category_color.dart';
 import 'package:via_app/utils/color.dart';
 import 'package:via_app/widgets/desc_card.dart';
@@ -132,7 +132,7 @@ class _DetailcardPageState extends State<DetailcardPage> {
       elevation: 0,
       leading: UnconstrainedBox(
         child: CoreIconButton(
-          icon: FontAwesomeIcons.chevronLeft,
+          icon: LucideIcons.chevronLeft,
           variant: CoreIconButtonVariant.secondary,
           borderRadius: 100,
           onPressed: () => Navigator.pop(context),
@@ -140,7 +140,7 @@ class _DetailcardPageState extends State<DetailcardPage> {
       ),
       actions: [
         CoreIconButton(
-          icon: FontAwesomeIcons.shareNodes,
+          icon: LucideIcons.share2,
           variant: CoreIconButtonVariant.secondary,
           borderRadius: 100,
           onPressed: () {},
@@ -148,7 +148,7 @@ class _DetailcardPageState extends State<DetailcardPage> {
         const SizedBox(width: 10),
         CoreIconButton(
           variant: CoreIconButtonVariant.secondary,
-          icon: item.isFavorite ? Icons.favorite : FontAwesomeIcons.heart,
+          icon: item.isFavorite ? Icons.favorite : LucideIcons.heart,
           iconColor: item.isFavorite ? AppColors.destructive : null,
           borderRadius: 100,
           onPressed: () {
@@ -241,7 +241,7 @@ class _DetailcardPageState extends State<DetailcardPage> {
             textTheme: textTheme,
             title: '${item.distance} km',
             subtitle: 'de distancia',
-            icon: FontAwesomeIcons.locationDot,
+            icon: LucideIcons.mapPin,
           ),
         ),
         const SizedBox(width: 8),
@@ -250,7 +250,7 @@ class _DetailcardPageState extends State<DetailcardPage> {
             textTheme: textTheme,
             title: _calculateDuration(item.schedules.first.startTime, item.schedules.first.endTime),
             subtitle: 'de duração',
-            icon: FontAwesomeIcons.clock,
+            icon: LucideIcons.clock,
           ),
         ),
         const SizedBox(width: 8),
@@ -259,7 +259,7 @@ class _DetailcardPageState extends State<DetailcardPage> {
             textTheme: textTheme,
             title: '${item.requiredVolunteers} vagas',
             subtitle: 'de voluntários',
-            icon: FontAwesomeIcons.userGroup,
+            icon: LucideIcons.users,
           ),
         ),
       ],
@@ -315,7 +315,7 @@ class _DetailcardPageState extends State<DetailcardPage> {
           ),
         ),
         const SizedBox(height: 10),
-        IconText(text: item.location, icon: FontAwesomeIcons.locationDot),
+        IconText(text: item.location, icon: LucideIcons.mapPin),
       ],
     );
   }
@@ -325,6 +325,7 @@ class _DetailcardPageState extends State<DetailcardPage> {
     TextTheme textTheme,
   ) {
     return CoreCard(
+      radius: CoreCardRadius.lg,
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       variant: CoreCardVariant.outline,
       backgroundColor: AppColors.gray100.withValues(alpha: .2),

@@ -1,6 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:via_app/enum/category_color.dart';
 import 'package:via_app/helper/date_helper.dart';
 import 'package:via_app/model/volunteer_opportunity.dart';
@@ -34,13 +34,14 @@ class ConfirmationPage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               CoreCard(
-                variant: .elevated,
-                padding: .zero,
+                radius: CoreCardRadius.lg,
+                variant: CoreCardVariant.elevated,
+                padding: EdgeInsets.zero,
                 child: Column(
-                  crossAxisAlignment: .start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ClipRRect(
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(12),
                         topRight: Radius.circular(12),
                       ),
@@ -58,7 +59,7 @@ class ConfirmationPage extends StatelessWidget {
                             bottom: 10,
                             left: 10,
                             child: Column(
-                              crossAxisAlignment: .start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   item.title,
@@ -112,13 +113,13 @@ class ConfirmationPage extends StatelessWidget {
                         vertical: 16,
                       ),
                       child: Column(
-                        crossAxisAlignment: .start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           _infoCard(
                             textTheme,
                             item,
                             'Data',
-                            FontAwesomeIcons.calendarDays,
+                            LucideIcons.calendar,
                             DateHelper.formatShortDate(item.schedules[0].date),
                           ),
                           const SizedBox(height: 10),
@@ -126,7 +127,7 @@ class ConfirmationPage extends StatelessWidget {
                             textTheme,
                             item,
                             'Horário',
-                            FontAwesomeIcons.clock,
+                            LucideIcons.clock,
                             '${item.schedules[0].startTime} - ${item.schedules[0].endTime}',
                           ),
                           const SizedBox(height: 10),
@@ -134,7 +135,7 @@ class ConfirmationPage extends StatelessWidget {
                             textTheme,
                             item,
                             'Local',
-                            FontAwesomeIcons.locationDot,
+                            LucideIcons.mapPin,
                             item.location,
                           ),
                         ],
@@ -143,7 +144,7 @@ class ConfirmationPage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               Text(
                 'Compartilhe sua participação e inspire pessoas! 🌟',
                 style: textTheme.bodyMedium!.copyWith(
@@ -152,26 +153,26 @@ class ConfirmationPage extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               CoreButton(
-                variant: .secondary,
+                variant: CoreButtonVariant.secondary,
                 fullWidth: true,
-                size: .lg,
-                icon: FontAwesomeIcons.shareNodes,
+                size: CoreButtonSize.lg,
+                icon: LucideIcons.share2,
                 label: 'Compartilhar nas redes sociais',
                 onPressed: () {},
               ),
               const SizedBox(height: 40),
               CoreButton(
-                variant: .primary,
+                variant: CoreButtonVariant.primary,
                 fullWidth: true,
-                size: .lg,
+                size: CoreButtonSize.lg,
                 label: 'Ver minhas ações',
                 onPressed: () {},
               ),
               const SizedBox(height: 10),
               CoreButton(
-                variant: .link,
+                variant: CoreButtonVariant.link,
                 fullWidth: true,
-                size: .lg,
+                size: CoreButtonSize.lg,
                 label: 'Voltar para a página inicial',
                 onPressed: () {
                   Navigator.pushNamed(context, '/home');
@@ -194,7 +195,7 @@ class ConfirmationPage extends StatelessWidget {
     return Row(
       children: [
         Container(
-          padding: .all(8),
+          padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
             color: AppColors.primary.withValues(alpha: .3),
             borderRadius: BorderRadius.circular(50),
@@ -203,7 +204,7 @@ class ConfirmationPage extends StatelessWidget {
         ),
         const SizedBox(width: 10),
         Column(
-          crossAxisAlignment: .start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               title,

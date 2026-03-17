@@ -1,6 +1,5 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:via_app/utils/color.dart';
 
 class LoginPage extends StatefulWidget {
@@ -47,7 +46,6 @@ class _LoginPageState extends State<LoginPage> {
     setState(() {
       _loading = true;
     });
-
 
     await Future.delayed(const Duration(seconds: 3));
     setState(() {
@@ -197,7 +195,7 @@ class _LoginPageState extends State<LoginPage> {
         //*== Botão de login com Google ==*//
         CoreButton(
           label: 'Continuar com google',
-          icon: FontAwesomeIcons.google,
+          icon: Icons.golf_course,
           variant: CoreButtonVariant.outline,
           fullWidth: true,
           size: CoreButtonSize.lg,

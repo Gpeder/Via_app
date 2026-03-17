@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:via_app/utils/theme.dart';
-import 'package:via_app/view/confirmation_page.dart';
-import 'package:via_app/view/detailcard_page.dart';
+import 'package:via_app/view/confirmation.dart';
+import 'package:via_app/view/detailcard.dart';
+import 'package:via_app/view/edit_profile.dart';
 import 'package:via_app/view/home_page.dart';
 import 'package:via_app/view/login_page.dart';
 import 'package:via_app/view/map_page.dart';
 import 'package:via_app/view/myaction_page.dart';
 import 'package:via_app/view/profile_page.dart';
 import 'package:via_app/view/root/root_page.dart';
-import 'package:via_app/view/selectdate_page.dart';
+import 'package:via_app/view/selectdate.dart';
 
 void main() {
   runApp(const ViaApp());
@@ -36,7 +37,7 @@ class ViaApp extends StatelessWidget {
         '/map': (context) => const MapPage(),
         '/myaction' : (context) => const MyactionPage(),
         '/profile' : (context) => const ProfilePage(),
-
+        '/edit_profile' : (context) => const EditProfile(),
       },
     );
   }

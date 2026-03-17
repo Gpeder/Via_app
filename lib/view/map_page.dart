@@ -1,8 +1,8 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:latlong2/latlong.dart' hide Path;
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:via_app/enum/category_color.dart';
 import 'package:via_app/model/categories.dart';
 import 'package:via_app/model/volunteer_opportunity.dart';
@@ -54,7 +54,7 @@ class _MapPageState extends State<MapPage> {
           size: CoreInputSize.lg,
           variant: CoreInputVariant.filled,
           controller: _searchController,
-          prefixIcon: FontAwesomeIcons.magnifyingGlass,
+          prefixIcon: LucideIcons.search,
         ),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(45),
@@ -103,6 +103,7 @@ class _MapPageState extends State<MapPage> {
                       "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
                   subdomains: const ['a', 'b', 'c', 'd'],
                   userAgentPackageName: 'com.gustavo.via',
+                  retinaMode: RetinaMode.isHighDensity(context),
                 ),
                 MarkerLayer(
                   markers: mockOpportunities.map((item) {
@@ -181,7 +182,7 @@ class OpportunityCard extends StatelessWidget {
             const SizedBox(width: 12),
             Expanded(
               child: Column(
-                crossAxisAlignment: .start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -208,7 +209,7 @@ class OpportunityCard extends StatelessWidget {
                       GestureDetector(
                         onTap: onClose,
                         child: const Icon(
-                          FontAwesomeIcons.xmark,
+                          LucideIcons.x,
                           size: 14,
                           color: AppColors.gray200,
                         ),

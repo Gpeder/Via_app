@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 
-enum TextSize {
-  md,
-  lg,
-}
-
 class IconText extends StatelessWidget {
   final String text;
   final IconData icon;
-  final TextSize size;
+  final double iconSize;
   final Color? iconColor;
   final Color? textColor;
 
@@ -16,35 +11,27 @@ class IconText extends StatelessWidget {
     super.key,
     required this.text,
     required this.icon,
-    this.size = TextSize.md,
+    this.iconSize = 14,
     this.iconColor,
     this.textColor,
   });
 
   @override
   Widget build(BuildContext context) {
-    TextStyle textStyle;
-    double iconSize;
-    
-    switch (size) {
-      case TextSize.lg:
-        textStyle = Theme.of(context).textTheme.bodyLarge!;
-        iconSize = 20.0;
-        break;
-      case TextSize.md:
-        textStyle = Theme.of(context).textTheme.bodyMedium!;
-        iconSize = 16.0;
-        break;
-    }
+    final textTheme = Theme.of(context).textTheme;
 
     return Row(
-      mainAxisSize: .min,
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, size: iconSize, color: iconColor ?? textStyle.color),
+        Icon(
+          icon,
+          size: iconSize,
+          color: iconColor ?? textTheme.bodyMedium!.color,
+        ),
         const SizedBox(width: 5),
         Text(
           text,
-          style: textStyle.copyWith(color: textColor),
+          style: textTheme.bodyMedium!.copyWith(color: textColor),
         ),
       ],
     );

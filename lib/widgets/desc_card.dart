@@ -19,6 +19,7 @@ class DescCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CoreCard(
+      radius: CoreCardRadius.lg,
       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
       variant: CoreCardVariant.outline,
       backgroundColor: AppColors.gray100.withValues(alpha: .2),
