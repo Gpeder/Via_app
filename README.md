@@ -6,22 +6,32 @@ O **VIA** é um aplicativo mobile desenvolvido em Flutter que conecta pessoas di
 
 ### 📱 Demonstração da Interface
 
-Para as imagens não ficarem "tudo junto", usamos tabelas. Isso força o alinhamento lado a lado e cria uma moldura organizada.
-
-| **Home** | **Filtros** | **Mapa** |
-| :---: | :---: | :---: |
-| <img src="assets/images/home.png" width="200"> | <img src="assets/images/homefilter.png" width="200"> | <img src="assets/images/map.png" width="200"> |
-
-<br> | **Minhas Ações** | **Perfil** | **Editar Perfil** |
-
-| :---: | :---: | :---: |
-| <img src="assets/images/action.png" width="200"> | <img src="assets/images/profile.png" width="200"> | <img src="assets/images/editprofile.png" width="200"> |
+<table align="center">
+  <tr>
+    <td align="center"><b>Home</b></td>
+    <td align="center"><b>Filtros</b></td>
+    <td align="center"><b>Mapa</b></td>
+  </tr>
+  <tr>
+    <td><img src="assets/images/home.png" width="200"></td>
+    <td><img src="assets/images/homefilter.png" width="200"></td>
+    <td><img src="assets/images/map.png" width="200"></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Minhas Ações</b></td>
+    <td align="center"><b>Perfil</b></td>
+    <td align="center"><b>Editar Perfil</b></td>
+  </tr>
+  <tr>
+    <td><img src="assets/images/action.png" width="200"></td>
+    <td><img src="assets/images/profile.png" width="200"></td>
+    <td><img src="assets/images/editprofile.png" width="200"></td>
+  </tr>
+</table>
 
 ---
 
 ### 🎥 Vídeo de Demonstração
-
-Para o vídeo ficar em destaque, coloque-o entre linhas em branco:
 
 https://github.com/Gpeder/via_app/blob/main/assets/images/video.mp4
 
@@ -39,8 +49,8 @@ https://github.com/Gpeder/via_app/blob/main/assets/images/video.mp4
 ### 🛠️ Tecnologias
 
 * **[Core UI](https://github.com/Gpeder/core_ui):** Biblioteca própria de componentes.
-* **Google Maps & Flutter Map:** Visualização geográfica.
-* **Lucide Icons:** Ícones modernos.
+* **Flutter Map:** Visualização geográfica das vagas.
+* **Lucide Icons:** Conjunto de ícones modernos.
 
 ---
 
