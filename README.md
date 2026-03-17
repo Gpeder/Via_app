@@ -1,56 +1,46 @@
-🤝 VIA - Volunteers in Action
-O VIA é um aplicativo mobile desenvolvido em Flutter que conecta pessoas dispostas a ajudar com organizações que precisam de voluntários. O foco é facilitar a descoberta de causas sociais próximas e o gerenciamento de ações solidárias.
+# 🤝 VIA - Volunteers in Action
 
-✨ Funcionalidades Principais
-📍 Mapa de Oportunidades: Localize vagas de voluntariado em tempo real baseadas na sua localização.
+O **VIA** é um aplicativo mobile desenvolvido em Flutter que conecta pessoas dispostas a ajudar com organizações que precisam de voluntários.
 
-🔍 Filtros Inteligentes: Busque por categorias (Animais, Educação, Saúde, etc.), distância ou disponibilidade.
+---
 
-📅 Agendamento Simples: Escolha o melhor horário para você e confirme sua participação com poucos cliques.
+### 📱 Demonstração da Interface
 
-👤 Perfil de Impacto: Acompanhe suas horas de serviço, atividades concluídas e pontos de impacto gerados.
+Para as imagens não ficarem "tudo junto", usamos tabelas. Isso força o alinhamento lado a lado e cria uma moldura organizada.
 
-🌓 Suporte a Temas: Interface adaptável com modos claro (Light) e escuro (Dark).
+| **Home** | **Filtros** | **Mapa** |
+| :---: | :---: | :---: |
+| <img src="assets/images/home.png" width="200"> | <img src="assets/images/homefilter.png" width="200"> | <img src="assets/images/map.png" width="200"> |
 
-🛠️ Tecnologias e Bibliotecas
-Este projeto utiliza tecnologias modernas do ecossistema Flutter:
+<br> | **Minhas Ações** | **Perfil** | **Editar Perfil** |
+| :---: | :---: | :---: |
+| <img src="assets/images/action.png" width="200"> | <img src="assets/images/profile.png" width="200"> | <img src="assets/images/editprofile.png" width="200"> |
 
-Core UI: Biblioteca de componentes customizados desenvolvida especificamente para manter a consistência visual.
+---
 
-Google Maps & Flutter Map: Integração de mapas para visualização geográfica das vagas.
+### 🎥 Vídeo de Demonstração
 
-Shimmer: Animações suaves de carregamento para uma melhor experiência do usuário.
+Para o vídeo ficar em destaque, coloque-o entre linhas em branco:
 
-Lucide Icons: Conjunto de ícones modernos e minimalistas.
+https://github.com/Gpeder/via_app/blob/main/assets/images/video.mp4
 
-Google Fonts: Tipografia personalizada (Google Sans).
+---
 
-📁 Estrutura do Projeto
-A organização segue padrões de escalabilidade:
+### ✨ Funcionalidades Principais
 
-lib/view: Telas principais e lógica de navegação.
+* **📍 Mapa de Oportunidades:** Localize vagas baseadas na sua localização.
+* **🔍 Filtros Inteligentes:** Busque por categorias ou distância.
+* **📅 Agendamento Simples:** Escolha horários e confirme sua participação.
+* **👤 Perfil de Impacto:** Acompanhe horas e atividades concluídas.
 
-lib/widgets: Componentes reutilizáveis de interface.
+---
 
-lib/model: Definição de dados e regras de negócio.
+### 🛠️ Tecnologias
 
-lib/utils: Configurações de cores, temas e estilos globais.
+* **[Core UI](https://github.com/Gpeder/core_ui):** Biblioteca própria de componentes.
+* **Google Maps & Flutter Map:** Visualização geográfica.
+* **Lucide Icons:** Ícones modernos.
 
-lib/data: Dados fictícios (mock) para demonstração do protótipo.
+---
 
-🚀 Como rodar o projeto
-Certifique-se de ter o Flutter instalado na sua máquina.
-
-Clone o repositório:
-
-Bash
-git clone https://github.com/Gpeder/via_app.git
-Instale as dependências:
-
-Bash
-flutter pub get
-Execute o aplicativo:
-
-Bash
-flutter run
-Nota: Para o funcionamento completo do mapa, é necessário configurar uma chave de API do Google Maps no arquivo AndroidManifest.xml e AppDelegate.swift.
+**Desenvolvido com ❤️ por Gustavo.**
