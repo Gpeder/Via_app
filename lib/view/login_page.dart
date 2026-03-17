@@ -1,6 +1,8 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:via_app/utils/color.dart';
+import 'package:via_app/utils/image.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -122,18 +124,19 @@ class _LoginPageState extends State<LoginPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: MediaQuery.of(context).size.height * 0.10),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.08),
         Container(
-          height: 80,
-          width: 80,
+          height: 100,
+          width: 100,
           decoration: BoxDecoration(
-            color: AppColors.primary,
+            color: AppColors.gray100,
             borderRadius: BorderRadius.circular(12),
+            shape: BoxShape.rectangle,
           ),
+          child: Image(image: AssetImage(AppImage.logo)),
         ),
         const SizedBox(height: 20),
 
-        //*== Título e subtítulo ==*//
         Text('Bem vindo de volta!👋', style: textTheme.titleLarge),
         const SizedBox(height: 8),
         Text(
@@ -176,7 +179,6 @@ class _LoginPageState extends State<LoginPage> {
         ),
         const SizedBox(height: 10),
 
-        //*== Divisor ==*//
         Row(
           children: [
             Expanded(child: Divider(thickness: 0.5, color: AppColors.gray100)),
@@ -195,7 +197,7 @@ class _LoginPageState extends State<LoginPage> {
         //*== Botão de login com Google ==*//
         CoreButton(
           label: 'Continuar com google',
-          icon: Icons.golf_course,
+          icon: LucideIcons.glassWater,
           variant: CoreButtonVariant.outline,
           fullWidth: true,
           size: CoreButtonSize.lg,
