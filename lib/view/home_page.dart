@@ -1,7 +1,9 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:via_app/model/categories.dart';
+import 'package:via_app/model/user_model.dart';
 import 'package:via_app/model/volunteer_opportunity.dart';
 import 'package:via_app/utils/color.dart';
 import 'package:via_app/widgets/secondary_volunteer_card.dart';
@@ -23,6 +25,7 @@ class _HomePageState extends State<HomePage> {
     final textTheme = Theme.of(context).textTheme;
     final categoryItem = categories;
     final allItems = mockOpportunities;
+    final profile = mockCurrentUser;
 
     final filteredItems = _selectedCategoryIndex == 0
         ? allItems
@@ -34,7 +37,7 @@ class _HomePageState extends State<HomePage> {
               .toList();
 
     return Scaffold(
-      appBar: _appBar(textTheme),
+      appBar: _appBar(textTheme, profile),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -114,7 +117,7 @@ class _HomePageState extends State<HomePage> {
               ),
               SizedBox(height: 10),
               ListView.separated(
-                padding: const EdgeInsets.only(bottom: 20),
+                padding: .zero,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 separatorBuilder: (context, index) =>
@@ -151,7 +154,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  AppBar _appBar(TextTheme textTheme) {
+  //!App bar 
+  AppBar _appBar(TextTheme textTheme, UserProfile profile) {
     return AppBar(
       forceMaterialTransparency: true,
       actionsPadding: const EdgeInsets.only(right: 16),
@@ -163,15 +167,33 @@ class _HomePageState extends State<HomePage> {
             'Boa tarde,',
             style: textTheme.bodyLarge!.copyWith(color: AppColors.gray200),
           ),
-          Text('Jossick Wilekenso 👋', style: textTheme.titleLarge),
+          Text('${profile.name} 👋', style: textTheme.titleLarge),
         ],
       ),
       actions: [
-        CoreAvatar.network(
-          size: const Size(60, 60),
-          placeholder: Center(child: Text('J')),
-          'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/124598?v=3',
-          border: Border.all(color: AppColors.primary, width: 3),
+        FutureBuilder(
+          future: Future.delayed(const Duration(seconds: 3)),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Shimmer(
+                gradient: AppColors.getShimmerGradient(context),
+                child: Container(
+                  width: 60,
+                  height: 60,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              );
+            }
+            return CoreAvatar.network(
+              size: const Size(60, 60),
+              placeholder: Center(child: Text('J')),
+              'https://app.requestly.io/delay/2000/avatars.githubusercontent.com/u/124598?v=3',
+              border: Border.all(color: AppColors.primary, width: 3),
+            );
+          },
         ),
       ],
       bottom: PreferredSize(

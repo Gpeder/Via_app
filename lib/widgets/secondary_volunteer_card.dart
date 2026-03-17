@@ -1,6 +1,7 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:lucide_icons_flutter/lucide_icons.dart' show LucideIcons;
+import 'package:lucide_icons_flutter/lucide_icons.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:via_app/utils/color.dart';
 import 'package:via_app/widgets/icon_text.dart';
 
@@ -44,11 +45,26 @@ class SecondaryVolunteerCard extends StatelessWidget {
                     topLeft: Radius.circular(12),
                     topRight: Radius.circular(12),
                   ),
-                  child: Image.network(
-                    image,
-                    height: 150,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
+                  child: FutureBuilder(
+                    future: Future.delayed(const Duration(seconds: 3)),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Shimmer(
+                          gradient: AppColors.getShimmerGradient(context),
+                          child: Container(
+                            height: 150,
+                            width: double.infinity,
+                            color: Colors.white,
+                          ),
+                        );
+                      }
+                      return Image.network(
+                        image,
+                        height: 150,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      );
+                    },
                   ),
                 ),
                 Positioned(

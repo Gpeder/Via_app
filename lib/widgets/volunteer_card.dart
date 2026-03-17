@@ -1,6 +1,7 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart' show LucideIcons;
+import 'package:shimmer/shimmer.dart';
 import 'package:via_app/enum/category_color.dart';
 import 'package:via_app/utils/color.dart';
 import 'package:via_app/widgets/icon_text.dart';
@@ -56,12 +57,27 @@ class VolunteerCard extends StatelessWidget {
                   topLeft: Radius.circular(12),
                   topRight: Radius.circular(12),
                 ),
-                child: Image(
-                  height: 180,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  image: NetworkImage(image),
-                ),
+                child: FutureBuilder(
+                    future: Future.delayed(const Duration(seconds: 3)),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Shimmer(
+                          gradient: AppColors.getShimmerGradient(context),
+                          child: Container(
+                            height: 180,
+                            width: double.infinity,
+                            color: Colors.white,
+                          ),
+                        );
+                      }
+                      return Image.network(
+                        image,
+                        height: 150,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      );
+                    },
+                  ),
               ),
               Positioned(
                 left: 10,
@@ -69,7 +85,7 @@ class VolunteerCard extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   decoration: BoxDecoration(
-                    borderRadius:  BorderRadius.all(Radius.circular(12)),
+                    borderRadius: BorderRadius.all(Radius.circular(12)),
                     color: cat.bgColor,
                   ),
                   child: Text(
@@ -135,10 +151,7 @@ class VolunteerCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconText(
-                      text: '$distance km',
-                      icon: LucideIcons.mapPin,
-                    ),
+                    IconText(text: '$distance km', icon: LucideIcons.mapPin),
                     const SizedBox(width: 20),
                     IconText(text: '$time h', icon: LucideIcons.clock),
                     Spacer(),

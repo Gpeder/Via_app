@@ -21,4 +21,24 @@ class AppColors {
     end: Alignment.bottomRight,
     colors: [Color(0xFF1F1F1F), Color(0xFF374151)],
   );
+
+  static LinearGradient getShimmerGradient(BuildContext context) {
+    final isLight = Theme.of(context).brightness == Brightness.light;
+    return LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: isLight
+          ? [
+              const Color(0xFFEBEBF4),
+              const Color(0xFFF4F4F4),
+              const Color(0xFFEBEBF4),
+            ]
+          : [
+              const Color(0xFF3A3A3C),
+              const Color(0xFF48484A),
+              const Color(0xFF3A3A3C),
+            ],
+      stops: const [0.1, 0.3, 0.4],
+    );
+  }
 }
